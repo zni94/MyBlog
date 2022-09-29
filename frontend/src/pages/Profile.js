@@ -1,10 +1,8 @@
-import {Fragment} from "react";
-
 const Profile = () => {
     return (
-        <Fragment>
-            <div>PROFILE</div>
-        </Fragment>
+        <div className={'profile-container'}>
+            <div className={'profile-contents'}>PROFILE</div>
+        </div>
     )
 }
 

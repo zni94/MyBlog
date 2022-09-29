@@ -7,6 +7,7 @@ export const changePage = (pageName) => ({
 const initialState = {
     home: true,
     profile: false,
+    diary: false,
 }
 
 const togglePages = (state = initialState, action) => {
@@ -17,6 +18,7 @@ const togglePages = (state = initialState, action) => {
                 ...state,
                 home: obj.home,
                 profile: obj.profile,
+                diary: obj.diary,
             }
         default:
             return state
