@@ -37,7 +37,7 @@ div.nav-container ul.menu-items li.menu-item:not(:last-child) {
 }
 div.nav-container div.time-zone-container {
   position: absolute;
-  padding-right: 0.875rem;
+  padding: 0 0.875rem;
   font-size: 0.85rem;
   color: white;
   font-weight: 400;
