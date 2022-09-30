@@ -1,0 +1,49 @@
+div.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+
+  div.modal-contents-box {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    width: 300px;
+    height: 160px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: #4b4b4c 0px 3px 7px 3px;
+    z-index: 101;
+
+    div.modal-message-box {
+      padding: 0.625rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    div.modal-confirm-box {
+      padding: 0.625rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        width: 100px;
+        height: 28px;
+        outline: none;
+        border: 1px solid #ddd;
+        background-color: transparent;
+        border-radius: 5px;
+        box-shadow: #bbb 0 1px 2px 1px;
+      }
+    }
+  }
+}
