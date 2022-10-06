@@ -1,15 +1,15 @@
-import {useDispatch} from "react-redux";
-import {changePage} from "../store/src/togglePages";
+import {useDispatch, useSelector} from "react-redux";
+import {openPage} from "../store/src/togglePages";
 import '../css/nav.css'
 import TimeZone from "./TimeZone";
 
 const NavBar = () => {
     const dispatch = useDispatch();
+    const {profile, diary} = useSelector(state => state.togglePages);
 
     const onClick = (e) => {
-        console.log('CLICK')
         const value = e.currentTarget.dataset.value;
-        dispatch(changePage(value));
+        dispatch(openPage(value));
     }
 
     return (
@@ -18,12 +18,12 @@ const NavBar = () => {
                 <li className={'menu-item'} onClick={onClick} data-value={'home'}>
                     <span className="material-symbols-outlined">HOME</span>
                 </li>
-                <li className={'menu-item'} onClick={onClick} data-value={'profile'}>
+                {profile && <li className={'menu-item'} onClick={onClick} data-value={'profile'}>
                     <span className="material-symbols-outlined">PERSON</span>
-                </li>
-                <li className={'menu-item'} onClick={onClick} data-value={'diary'}>
+                </li>}
+                {diary && <li className={'menu-item'} onClick={onClick} data-value={'diary'}>
                     <span className="material-symbols-outlined">IMPORT_CONTACTS</span>
-                </li>
+                </li>}
             </ul>
             <TimeZone/>
         </div>

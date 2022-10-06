@@ -4,7 +4,7 @@ div.nav-container {
   height: 50px;
   width: 100%;
   bottom: 0;
-  background: #4b4b4c;
+  background: #6B69D6;
 
   ul.menu-items {
     width: 100%;
@@ -17,6 +17,7 @@ div.nav-container {
     align-items: center;
     padding: 0;
     margin: 0;
+    transition: all 1s;
 
     li.menu-item {
       list-style: none;
@@ -57,5 +58,6 @@ div.nav-container {
     align-items: center;
     right: 0;
     height: 100%;
+    user-select: none;
   }
 }

@@ -1,13 +1,17 @@
 export const CHANGE = 'MODAL/CHANGE';
 
-export const changeModal = (isModal) => ({
+export const changeModal = (isModal, msg, isConfirm) => ({
     type: CHANGE,
-    isModal
+    isModal,
+    msg,
+    isConfirm
 })
 
 
 const initialState = {
-    isModal: true,
+    isModal: false,
+    msg: '',
+    isConfirm: false,
 }
 
 const toggleModal = (state = initialState, action) => {
@@ -16,6 +20,8 @@ const toggleModal = (state = initialState, action) => {
             return {
                 ...state,
                 isModal: action.isModal,
+                msg: action.msg,
+                isConfirm: action.isConfirm,
             }
         default:
             return state
