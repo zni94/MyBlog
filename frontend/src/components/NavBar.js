@@ -16,7 +16,7 @@ const NavBar = () => {
         <div className={'nav-container'}>
             <ul className={'menu-items'}>
                 <li className={'menu-item'} onClick={onClick} data-value={'home'}>
-                    <span className="material-symbols-outlined">HOME</span>
+                    <span className="material-symbols-outlined">SEARCH</span>
                 </li>
                 {profile && <li className={'menu-item'} onClick={onClick} data-value={'profile'}>
                     <span className="material-symbols-outlined">PERSON</span>

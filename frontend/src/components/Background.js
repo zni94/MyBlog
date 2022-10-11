@@ -10,6 +10,9 @@ const Background = () => {
 
     return (
         <Fragment>
+            <div className={'background-items'}>
+                <div>대충 Icon 자리</div>
+            </div>
             <div className={'layout'}>
                 {diary && <Diary/>}
                 <NavBar/>
