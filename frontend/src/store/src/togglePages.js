@@ -13,7 +13,7 @@ export const closePage = (pageName) => ({
 const initialState = {
     home: false,
     profile: false,
-    diary: true,
+    diary: false,
 }
 
 const togglePages = (state = initialState, action) => {
@@ -40,7 +40,7 @@ const togglePages = (state = initialState, action) => {
 }
 
 const returnState = (pageName, type) => {
-    const state = {};
+    const state = initialState;
     const keys = Object.keys(initialState);
 
     switch (type) {
@@ -57,7 +57,7 @@ const returnState = (pageName, type) => {
         default:
             break;
     }
-    
+
     return state;
 }
 

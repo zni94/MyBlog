@@ -1,12 +1,17 @@
 const Icon = (props) => {
-    const onClick = (e) => {
-        console.log('CLICK')
-    }
+    const {onDoubleClick, children, title} = props;
 
-    return (<div className={'icon-container'}>
-        <button className={'icon-image'}></button>
-        <label className={'icon-name'}></label>
-    </div>)
+    return (
+        <div className={'icon-container'} onDoubleClick={onDoubleClick}>
+            <button className={'icon-image'}>
+                IMAGE
+                {children}
+            </button>
+            <label className={'icon-name'}>
+                {title}
+            </label>
+        </div>
+    )
 }
 
 export default Icon;

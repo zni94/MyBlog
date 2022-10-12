@@ -5,7 +5,8 @@ import TimeZone from "./TimeZone";
 
 const NavBar = () => {
     const dispatch = useDispatch();
-    const {profile, diary} = useSelector(state => state.togglePages);
+
+    const {items} = useSelector(state => state.navItems);
 
     const onClick = (e) => {
         const value = e.currentTarget.dataset.value;
@@ -15,15 +16,16 @@ const NavBar = () => {
     return (
         <div className={'nav-container'}>
             <ul className={'menu-items'}>
-                <li className={'menu-item'} onClick={onClick} data-value={'home'}>
-                    <span className="material-symbols-outlined">SEARCH</span>
-                </li>
-                {profile && <li className={'menu-item'} onClick={onClick} data-value={'profile'}>
-                    <span className="material-symbols-outlined">PERSON</span>
-                </li>}
-                {diary && <li className={'menu-item'} onClick={onClick} data-value={'diary'}>
-                    <span className="material-symbols-outlined">IMPORT_CONTACTS</span>
-                </li>}
+                {items.length > 0 &&
+                    items.map((contents, index) => (
+                        <li key={index}
+                            className={'menu-item'}
+                            onClick={onClick}
+                            data-value={contents.name}
+                        >
+                            <span className={'material-symbols-outlined'}>{contents.icon}</span>
+                        </li>)
+                    )}
             </ul>
             <TimeZone/>
         </div>
