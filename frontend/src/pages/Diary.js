@@ -16,7 +16,7 @@ const Diary = () => {
     }
 
     return (
-        <Window title={'Diary'} onClose={onClose}>
+        <Window title={'Diary'} onClose={onClose} name={'diary'}>
             <div className={'diary-container'}>
                 <div className={'diary-contents'}>DIARY</div>
             </div>

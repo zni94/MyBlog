@@ -5,6 +5,7 @@ div.nav-container {
   width: 100%;
   bottom: 0;
   background: #6B69D6;
+  z-index: 10;
 }
 div.nav-container ul.menu-items {
   width: 100%;
