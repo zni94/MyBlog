@@ -3,8 +3,6 @@ div.window-container {
   min-height: 360px;
   width: 1280px;
   height: 720px;
-  left: 50px;
-  top: 50px;
   background-color: #1d1d1d;
   box-shadow: inset 0 0 0 1px #4f4f4f;
   position: absolute;
@@ -12,7 +10,8 @@ div.window-container {
   margin: 0;
   border-radius: 5px;
   user-select: none;
-  overflow: auto;
+  resize: both;
+  overflow: hidden;
 
   div.window-nav-bar {
     display: flex;
@@ -25,7 +24,6 @@ div.window-container {
     box-shadow: inset 0 0 0 1px #4f4f4f;
     padding: 0;
     margin: 0;
-    position: absolute;
     border-radius: 5px 5px 0px 0px;
 
     div.window-title {
@@ -51,6 +49,10 @@ div.window-container {
         padding: 7px 12px;
         color: white;
         text-align: center;
+
+        span.material-symbols-outlined {
+          font-size: 14px;
+        }
       }
 
       li:last-child {
@@ -74,8 +76,34 @@ div.window-container {
       }
     }
   }
+
+  div.controlWindow-contents {
+    width: 100%;
+    height: calc(100% - 28px);
+  }
 }
 
-div.window-container {
-  resize: both;
+div.window-container.hide {
+  min-width: 0px !important;
+  min-height: 0px !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+
+div.window-container.max {
+  left: 0px !important;
+  top: 0px !important;
+  width: 100%;
+  height: calc(100% - 50px);
+  resize: none;
+}
+
+div.window-container.active {
+  z-index: 1;
+  box-shadow: inset 0 0 0 1px #6B69D6;
+
+  div.window-nav-bar {
+    box-shadow: inset 0 0 0 1px #6B69D6;
+    background-color: #6B69D6;
+  }
 }

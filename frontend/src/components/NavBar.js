@@ -1,16 +1,20 @@
 import {useDispatch, useSelector} from "react-redux";
-import {openPage} from "../store/src/togglePages";
 import '../css/nav.css'
 import TimeZone from "./TimeZone";
+import {promise} from "../modules/promise";
 
 const NavBar = () => {
     const dispatch = useDispatch();
 
     const {items} = useSelector(state => state.navItems);
 
-    const onClick = (e) => {
-        const value = e.currentTarget.dataset.value;
-        dispatch(openPage(value));
+    const hideHandler = (e) => {
+        const name = e.currentTarget.dataset.value;
+        console.log('name', name)
+        const container = document.getElementsByName('window-' + name)[0];
+        promise().then(() => {
+            container.classList.remove('hide');
+        })
     }
 
     return (
@@ -20,8 +24,8 @@ const NavBar = () => {
                     items.map((contents, index) => (
                         <li key={index}
                             className={'menu-item'}
-                            onClick={onClick}
                             data-value={contents.name}
+                            onMouseDown={hideHandler}
                         >
                             <span className={'material-symbols-outlined'}>{contents.icon}</span>
                         </li>)
