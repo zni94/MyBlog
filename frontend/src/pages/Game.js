@@ -3,25 +3,33 @@ import {closePage} from "../store/src/togglePages";
 import {useDispatch} from "react-redux";
 import {promise} from "../modules/promise";
 import {popItems} from "../store/src/navItems";
+import MapleStoryIcon from "../Icons/games/MapleStoryIcon";
 
-const Diary = () => {
+
+const Game = () => {
     const dispatch = useDispatch();
 
     const onClose = (e) => {
         promise().then(() => {
-            dispatch(closePage('diary'))
+            dispatch(closePage('game'))
         }).then(() => {
-            dispatch(popItems('diary'))
+            dispatch(popItems('game'))
         })
     }
 
     return (
-        <Window title={'Diary'} onClose={onClose} name={'diary'}>
+        <Window title={'Game'} onClose={onClose} name={'game'}>
             <div className={'contents-container'}>
-                <div className={'contents'}>DIARY</div>
+                <div className={'contents'}>
+                    <ul>
+                        <li>
+                            <MapleStoryIcon/>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </Window>
     )
 }
 
-export default Diary;
+export default Game;

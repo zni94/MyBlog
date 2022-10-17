@@ -1,32 +1,37 @@
 import NavBar from "./NavBar";
-import {useDispatch, useSelector} from "react-redux";
-import {Fragment} from "react";
+import {useSelector} from "react-redux";
 import Modal from "./Modal";
 import Diary from "../pages/Diary";
 import Profile from "../pages/Profile";
-import DiaryIcon from "../Icons/DiaryIcon";
-import ProfileIcon from "../Icons/ProfileIcon";
+import DiaryIcon from "../Icons/menus/DiaryIcon";
+import ProfileIcon from "../Icons/menus/ProfileIcon";
 import '../css/background.css';
+import GameIcon from "../Icons/menus/GameIcon";
+import Game from "../pages/Game";
+import SNSIcon from "../Icons/menus/SNSIcon";
+import SNS from "../pages/SNS";
 
 const Background = () => {
-    const dispatch = useDispatch();
-
-    const {home, profile, diary} = useSelector(state => state.togglePages);
+    const {profile, diary, game, sns} = useSelector(state => state.togglePages);
     const {isModal} = useSelector(state => state.toggleModal);
 
     return (
-        <Fragment>
+        <div className={'background-container'}>
             <div className={'background-items'}>
                 <DiaryIcon/>
                 <ProfileIcon/>
+                <GameIcon/>
+                <SNSIcon/>
             </div>
             <div className={'layout'}>
                 {diary && <Diary/>}
                 {profile && <Profile/>}
+                {game && <Game/>}
+                {sns && <SNS/>}
                 <NavBar/>
             </div>
             {isModal && <Modal/>}
-        </Fragment>
+        </div>
     )
 }
 

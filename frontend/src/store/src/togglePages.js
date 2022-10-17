@@ -11,9 +11,10 @@ export const closePage = (pageName) => ({
 })
 
 const initialState = {
-    home: false,
     profile: false,
     diary: false,
+    game: false,
+    sns: false,
 }
 
 const togglePages = (state = initialState, action) => {
@@ -22,17 +23,19 @@ const togglePages = (state = initialState, action) => {
             const open_obj = returnState(action.pageName, 'OPEN');
             return {
                 ...state,
-                home: open_obj.home,
                 profile: open_obj.profile,
                 diary: open_obj.diary,
+                game: open_obj.game,
+                sns: open_obj.sns,
             }
         case CLOSE:
             const close_obj = returnState(action.pageName, 'CLOSE');
             return {
                 ...state,
-                home: close_obj.home,
                 profile: close_obj.profile,
                 diary: close_obj.diary,
+                game: close_obj.game,
+                sns: close_obj.sns,
             }
         default:
             return state

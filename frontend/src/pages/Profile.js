@@ -17,8 +17,8 @@ const Profile = () => {
 
     return (
         <Window title={'Profile'} onClose={onClose} name={'profile'}>
-            <div className={'profile-container'}>
-                <div className={'profile-contents'}>PROFILE</div>
+            <div className={'contents-container'}>
+                <div className={'contents'}>PROFILE</div>
             </div>
         </Window>
     )

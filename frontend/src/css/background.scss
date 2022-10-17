@@ -1,32 +1,8 @@
-div.background-items {
-  position: absolute;
+div.background-container {
+  height: 100%;
 
-  div.icon-container {
-    display: flex;
-    flex-direction: column;
-    flex: 2 1;
-    justify-content: center;
-    align-items: center;
-    margin: .875rem 0;
-    width: 78px;
-    user-select: none;
-
-    button.icon-image {
-      padding: .125rem;
-      background-color: transparent;
-      border: none;
-      outline: none;
-    }
-
-    label.icon-name {
-      padding: .125rem;
-      color: black;
-      font-size: .8rem;
-      font-weight: 400;
-    }
+  div.background-items {
+    position: absolute;
   }
 
-  div.icon-container:hover {
-    background-color: rgba(255, 255, 255, .2);
-  }
 }

@@ -21,21 +21,24 @@ div.nav-container ul.menu-items {
   transition: all 1s;
 }
 div.nav-container ul.menu-items li.menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
   list-style: none;
+  border-radius: 5px;
 }
 div.nav-container ul.menu-items li.menu-item .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
   font-size: 24px;
   color: white;
   user-select: none;
-  cursor: pointer;
   transition: all 0.5s;
 }
-div.nav-container ul.menu-items li.menu-item:hover .material-symbols-outlined {
-  font-size: 36px;
-}
-div.nav-container ul.menu-items li.menu-item:not(:last-child) {
-  margin-right: 1.875rem;
+div.nav-container ul.menu-items li.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 div.nav-container div.time-zone-container {
   position: absolute;
