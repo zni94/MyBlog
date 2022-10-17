@@ -21,7 +21,14 @@ div.nav-container {
     transition: all 1s;
 
     li.menu-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      margin: 5px;
       list-style: none;
+      border-radius: 5px;
 
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0,
@@ -32,20 +39,12 @@ div.nav-container {
         font-size: 24px;
         color: white;
         user-select: none;
-        cursor: pointer;
         transition: all .5s;
       }
     }
 
     li.menu-item:hover {
-      .material-symbols-outlined {
-        font-size: 36px;
-      }
-    }
-
-
-    li.menu-item:not(:last-child) {
-      margin-right: 1.875rem;
+      background-color: rgba(255, 255, 255, .1);
     }
   }
 

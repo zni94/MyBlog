@@ -1,6 +1,7 @@
 import '../css/window.css';
 import {useState} from "react";
 import {promise} from "../modules/promise";
+import {addActiveById, addHideById, findParentNode, removeActive} from "../modules/activeControl";
 
 const Window = (props) => {
     const {title, onClose, children, name} = props;
@@ -39,13 +40,8 @@ const Window = (props) => {
     }
 
     const hideHandler = (e) => {
-        const parent = findParentNode(e.target, 'windowContainer');
-
-        promise().then(() => {
-            parent.classList.remove('active')
-            parent.classList.add('hide');
-        })
-
+        addHideById(e.target, 'windowContainer')
+        removeActive('icon-container');
     }
 
     const maximizeHandler = (e) => {
@@ -69,13 +65,8 @@ const Window = (props) => {
     }
 
     const activeHandler = (e) => {
-        const containers = document.getElementsByClassName('window-container');
-        [...containers].forEach(container => {
-            container.classList.remove('active');
-        })
-
-        const container = findParentNode(e.target, 'windowContainer');
-        container.classList.add('active')
+        removeActive('window-container');
+        addActiveById(e.target, 'windowContainer');
     }
 
     return (
@@ -127,12 +118,3 @@ const Window = (props) => {
 }
 
 export default Window
-
-const findParentNode = (target, findName) => {
-    let returnTarget = target;
-    while (returnTarget.getAttribute('id') !== findName) {
-        returnTarget = returnTarget.parentNode;
-    }
-
-    return returnTarget
-}

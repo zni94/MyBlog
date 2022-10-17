@@ -1,0 +1,52 @@
+/* In background */
+div.icon-container {
+  display: flex;
+  flex-direction: column;
+  flex: 2 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0.875rem 0;
+  width: 78px;
+  user-select: none;
+}
+div.icon-container button.icon-image {
+  padding: 0.125rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+div.icon-container button.icon-image img {
+  width: 36px;
+  height: 36px;
+}
+div.icon-container button.icon-image .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 200, "opsz" 48;
+  font-size: 36px;
+  color: white;
+  user-select: none;
+  transition: all 0.5s;
+}
+div.icon-container label.icon-name {
+  padding: 0.125rem;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+div.icon-container:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+div.icon-container.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* In contents */
+div.contents label.icon-name {
+  padding: 0.125rem;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/*# sourceMappingURL=icon.css.map */

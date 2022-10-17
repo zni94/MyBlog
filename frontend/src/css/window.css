@@ -56,7 +56,7 @@ div.window-container div.window-nav-bar ul li:last-child {
   border-radius: 0 5px 0 0;
 }
 div.window-container div.window-nav-bar ul li:not(:last-child):hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 div.window-container div.window-nav-bar ul li:last-child:hover {
   background-color: #EC4C4C;
@@ -70,6 +70,20 @@ div.window-container div.window-nav-bar ul li:last-child:active {
 div.window-container div.controlWindow-contents {
   width: 100%;
   height: calc(100% - 28px);
+}
+div.window-container div.controlWindow-contents div.contents-container {
+  padding: 0.625rem;
+}
+div.window-container div.controlWindow-contents div.contents-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+div.window-container div.controlWindow-contents div.contents-container ul li:not(:last-child) {
+  margin-right: 0.25rem;
 }
 
 div.window-container.hide {

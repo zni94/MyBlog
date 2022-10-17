@@ -1,19 +1,21 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import '../css/nav.css'
 import TimeZone from "./TimeZone";
 import {promise} from "../modules/promise";
+import {removeActive, toggleActiveByName} from "../modules/activeControl";
 
 const NavBar = () => {
-    const dispatch = useDispatch();
-
     const {items} = useSelector(state => state.navItems);
 
     const hideHandler = (e) => {
         const name = e.currentTarget.dataset.value;
-        console.log('name', name)
         const container = document.getElementsByName('window-' + name)[0];
+
         promise().then(() => {
             container.classList.remove('hide');
+        }).then(() => {
+            removeActive('icon-container')
+            toggleActiveByName('window-container', 'window-' + name);
         })
     }
 
