@@ -6,11 +6,7 @@ const NaverIcon = () => {
         return window.open('https://blog.naver.com/free_zni', '_blank')
     }
 
-    return (
-        <Icon title={'Naver Blog'} onDoubleClick={onDoubleClick}>
-            <img src={NaverBlog} alt={'Naver Blog'}/>
-        </Icon>
-    )
+    return <Icon title={'Naver Blog'} onDoubleClick={onDoubleClick} thumbnail={NaverBlog}/>
 }
 
 export default NaverIcon

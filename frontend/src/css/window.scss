@@ -27,10 +27,17 @@ div.window-container {
     border-radius: 5px 5px 0px 0px;
 
     div.window-title {
-      padding: 7px 12px;
-      font-size: 0.625rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 4px;
+      font-size: .625rem;
       font-weight: 100;
       color: white;
+
+      svg {
+        margin-right: .375rem;
+      }
     }
 
     ul {

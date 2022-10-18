@@ -6,11 +6,7 @@ const TStoryIcon = () => {
         return window.open('https://developer-zni.tistory.com', '_blank')
     }
 
-    return (
-        <Icon title={'T-Story'} onDoubleClick={onDoubleClick}>
-            <img src={TStory} alt={'T-Story'}/>
-        </Icon>
-    )
+    return <Icon title={'T-Story'} onDoubleClick={onDoubleClick} thumbnail={TStory}/>
 }
 
 export default TStoryIcon

@@ -3,6 +3,7 @@ import '../css/nav.css'
 import TimeZone from "./TimeZone";
 import {promise} from "../modules/promise";
 import {removeActive, toggleActiveByName} from "../modules/activeControl";
+import Calendar from "./Calendar";
 
 const NavBar = () => {
     const {items} = useSelector(state => state.navItems);
@@ -20,21 +21,26 @@ const NavBar = () => {
     }
 
     return (
-        <div className={'nav-container'}>
-            <ul className={'menu-items'}>
-                {items.length > 0 &&
-                    items.map((contents, index) => (
-                        <li key={index}
-                            className={'menu-item'}
-                            data-value={contents.name}
-                            onMouseDown={hideHandler}
-                        >
-                            <span className={'material-symbols-outlined'}>{contents.icon}</span>
-                        </li>)
-                    )}
-            </ul>
-            <TimeZone/>
-        </div>
+        <>
+            <Calendar/>
+            <div className={'nav-container'}>
+                <ul className={'menu-items'}>
+                    {items.length > 0 &&
+                        items.map((contents, index) => (
+                            <li key={index}
+                                className={'menu-item'}
+                                data-value={contents.name}
+                                onMouseDown={hideHandler}
+                            >
+                                <svg width={36} height={36}>
+                                    <image width={36} height={36} href={contents.thumbnail}/>
+                                </svg>
+                            </li>)
+                        )}
+                </ul>
+                <TimeZone/>
+            </div>
+        </>
     )
 }
 

@@ -8,6 +8,7 @@ div.icon-container {
   margin: 0.875rem 0;
   width: 78px;
   user-select: none;
+  border-radius: 5px;
 }
 div.icon-container button.icon-image {
   padding: 0.125rem;
@@ -38,7 +39,7 @@ div.icon-container:hover {
 }
 
 div.icon-container.active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* In contents */

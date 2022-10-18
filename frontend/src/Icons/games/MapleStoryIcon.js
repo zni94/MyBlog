@@ -6,11 +6,7 @@ const MapleStoryIcon = () => {
         return window.open('https://maplestory.nexon.com/Home/Main', '_blank')
     }
 
-    return (
-        <Icon title={'MapleStory'} onDoubleClick={onDoubleClick}>
-            <img src={MapleStory} alt={'mapleStory'}/>
-        </Icon>
-    )
+    return <Icon title={'MapleStory'} onDoubleClick={onDoubleClick} thumbnail={MapleStory}/>
 }
 
 export default MapleStoryIcon
