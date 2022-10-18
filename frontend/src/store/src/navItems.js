@@ -12,7 +12,7 @@ export const popItems = (name) => ({
 
 const initialState = {
     items: [
-        {name: 'search', icon: 'SEARCH'}
+        {name: 'search', thumbnail: 'SEARCH'}
     ]
 }
 

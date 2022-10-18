@@ -4,7 +4,7 @@ import {promise} from "../modules/promise";
 import {addActiveById, addHideById, findParentNode, removeActive} from "../modules/activeControl";
 
 const Window = (props) => {
-    const {title, onClose, children, name} = props;
+    const {thumbnail, title, onClose, children, name} = props;
 
     const [isMax, setIsMax] = useState(false)
 
@@ -86,7 +86,12 @@ const Window = (props) => {
                  onDragEnd={dragHandler.onDragEnd}
                  onDoubleClick={!isMax ? maximizeHandler : minimizeHandler}
                  draggable={true}>
-                <div className={'window-title'}>{title}</div>
+                <div className={'window-title'}>
+                    <svg width={24} height={24}>
+                        <image width={24} height={24} href={thumbnail}/>
+                    </svg>
+                    {title}
+                </div>
                 <ul>
                     <li onMouseDown={hideHandler}>
                         <span className="material-symbols-outlined">

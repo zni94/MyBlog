@@ -43,14 +43,20 @@ div.nav-container ul.menu-items li.menu-item:hover {
 div.nav-container div.time-zone-container {
   position: absolute;
   padding: 0 0.875rem;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: white;
   font-weight: 400;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
   right: 0;
   height: 100%;
   user-select: none;
+  border-radius: 5px;
+}
+div.nav-container div.time-zone-container:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /*# sourceMappingURL=nav.css.map */
