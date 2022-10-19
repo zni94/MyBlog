@@ -1,10 +1,10 @@
-import Window from "../components/Window";
-import {closePage} from "../store/src/togglePages";
+import Window from "../Window";
+import {closePage} from "../../store/src/togglePages";
 import {useDispatch} from "react-redux";
-import {promise} from "../modules/promise";
-import {popItems} from "../store/src/navItems";
+import {promise} from "../../modules/promise";
+import {popItems} from "../../store/src/navItems";
 import Game from "../pages/Game";
-import Nintendo_Icon from '../lib/icons/Nintendo_300.png'
+import {MenuIcon} from "../../icons";
 
 
 const GameWindow = () => {
@@ -19,7 +19,7 @@ const GameWindow = () => {
     }
 
     return (
-        <Window title={'Game'} onClose={onClose} name={'game'} thumbnail={Nintendo_Icon}>
+        <Window title={'Game'} onClose={onClose} name={'game'} thumbnail={MenuIcon.Folder}>
             <Game/>
         </Window>
     )

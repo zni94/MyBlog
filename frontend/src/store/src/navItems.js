@@ -1,3 +1,5 @@
+import {MenuIcon} from "../../icons";
+
 export const PUSH = 'PUSH/ITEMS';
 export const POP = 'POP/ITEMS';
 
@@ -12,7 +14,7 @@ export const popItems = (name) => ({
 
 const initialState = {
     items: [
-        {name: 'search', thumbnail: 'SEARCH'}
+        {name: 'search', thumbnail: MenuIcon.Search}
     ]
 }
 

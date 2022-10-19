@@ -15,6 +15,7 @@ const initialState = {
     diary: false,
     game: false,
     sns: false,
+    ide: false,
 }
 
 const togglePages = (state = initialState, action) => {
@@ -27,6 +28,7 @@ const togglePages = (state = initialState, action) => {
                 diary: open_obj.diary,
                 game: open_obj.game,
                 sns: open_obj.sns,
+                ide: open_obj.ide,
             }
         case CLOSE:
             const close_obj = returnState(action.pageName, 'CLOSE');
@@ -36,6 +38,7 @@ const togglePages = (state = initialState, action) => {
                 diary: close_obj.diary,
                 game: close_obj.game,
                 sns: close_obj.sns,
+                ide: close_obj.ide,
             }
         default:
             return state

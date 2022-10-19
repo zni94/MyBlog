@@ -1,10 +1,10 @@
-import Icon from "../../components/Icon";
+import Icon from "../../Icon";
 import {useDispatch, useSelector} from "react-redux";
-import {openPage} from "../../store/src/togglePages";
-import {promise} from "../../modules/promise";
-import {pushItems} from "../../store/src/navItems";
-import {removeActive, toggleActiveByName} from "../../modules/activeControl";
-import Diary_Icon from '../../lib/icons/Diary_300.png'
+import {openPage} from "../../../store/src/togglePages";
+import {promise} from "../../../modules/promise";
+import {pushItems} from "../../../store/src/navItems";
+import {removeActive, toggleActiveByName} from "../../../modules/activeControl";
+import {MenuIcon} from "../../../icons";
 
 const DiaryIcon = () => {
     const dispatch = useDispatch();
@@ -24,11 +24,11 @@ const DiaryIcon = () => {
             removeActive('icon-container')
             toggleActiveByName('window-container', 'window-diary')
         }).then(() => {
-            dispatch(pushItems({name: 'diary', thumbnail: Diary_Icon}))
+            dispatch(pushItems({name: 'diary', thumbnail: MenuIcon.Folder}))
         })
     }
 
-    return <Icon onDoubleClick={onDoubleClick} title={'Diary'} thumbnail={Diary_Icon}/>
+    return <Icon onDoubleClick={onDoubleClick} title={'Diary'} thumbnail={MenuIcon.Folder}/>
 }
 
 export default DiaryIcon;

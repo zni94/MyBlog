@@ -10,6 +10,8 @@ const NavBar = () => {
 
     const hideHandler = (e) => {
         const name = e.currentTarget.dataset.value;
+        if (name === 'search') return;
+
         const container = document.getElementsByName('window-' + name)[0];
 
         promise().then(() => {
@@ -32,8 +34,8 @@ const NavBar = () => {
                                 data-value={contents.name}
                                 onMouseDown={hideHandler}
                             >
-                                <svg width={36} height={36}>
-                                    <image width={36} height={36} href={contents.thumbnail}/>
+                                <svg width={28} height={28}>
+                                    <image width={28} height={28} href={contents.thumbnail}/>
                                 </svg>
                             </li>)
                         )}
