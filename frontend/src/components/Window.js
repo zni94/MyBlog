@@ -87,8 +87,8 @@ const Window = (props) => {
                  onDoubleClick={!isMax ? maximizeHandler : minimizeHandler}
                  draggable={true}>
                 <div className={'window-title'}>
-                    <svg width={24} height={24}>
-                        <image width={24} height={24} href={thumbnail}/>
+                    <svg width={18} height={18}>
+                        <image width={18} height={18} href={thumbnail}/>
                     </svg>
                     {title}
                 </div>

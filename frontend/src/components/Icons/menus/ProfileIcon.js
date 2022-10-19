@@ -1,9 +1,10 @@
-import Icon from "../../components/Icon";
+import Icon from "../../Icon";
 import {useDispatch, useSelector} from "react-redux";
-import {openPage} from "../../store/src/togglePages";
-import {promise} from "../../modules/promise";
-import {pushItems} from "../../store/src/navItems";
-import {removeActive, toggleActiveByName} from "../../modules/activeControl";
+import {openPage} from "../../../store/src/togglePages";
+import {promise} from "../../../modules/promise";
+import {pushItems} from "../../../store/src/navItems";
+import {removeActive, toggleActiveByName} from "../../../modules/activeControl";
+import {MenuIcon} from "../../../icons";
 
 const ProfileIcon = () => {
     const dispatch = useDispatch();
@@ -23,15 +24,12 @@ const ProfileIcon = () => {
             removeActive('icon-container')
             toggleActiveByName('window-container', 'window-profile')
         }).then(() => {
-            dispatch(pushItems({name: 'profile', icon: 'PERSON'}))
+            dispatch(pushItems({name: 'profile', thumbnail: MenuIcon.Folder}))
         })
     }
 
-    return (
-        <Icon onDoubleClick={onDoubleClick} title={'Profile'}>
-            <span className={'material-symbols-outlined'}>PERSON</span>
-        </Icon>
-    )
+    return <Icon onDoubleClick={onDoubleClick} title={'Profile'} thumbnail={MenuIcon.Folder}/>
+
 }
 
 export default ProfileIcon;

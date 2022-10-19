@@ -1,9 +1,10 @@
-import Icon from "../../components/Icon";
+import Icon from "../../Icon";
 import {useDispatch, useSelector} from "react-redux";
-import {openPage} from "../../store/src/togglePages";
-import {promise} from "../../modules/promise";
-import {pushItems} from "../../store/src/navItems";
-import {removeActive, toggleActiveByName} from "../../modules/activeControl";
+import {openPage} from "../../../store/src/togglePages";
+import {promise} from "../../../modules/promise";
+import {pushItems} from "../../../store/src/navItems";
+import {removeActive, toggleActiveByName} from "../../../modules/activeControl";
+import {MenuIcon} from "../../../icons";
 
 const SNSIcon = () => {
     const dispatch = useDispatch();
@@ -23,15 +24,11 @@ const SNSIcon = () => {
             removeActive('icon-container')
             toggleActiveByName('window-container', 'window-sns')
         }).then(() => {
-            dispatch(pushItems({name: 'sns', icon: 'PUBLIC'}))
+            dispatch(pushItems({name: 'sns', thumbnail: MenuIcon.Folder}))
         })
     }
 
-    return (
-        <Icon onDoubleClick={onDoubleClick} title={'SNS'}>
-            <span className={'material-symbols-outlined'}>PUBLIC</span>
-        </Icon>
-    )
+    return <Icon onDoubleClick={onDoubleClick} title={'SNS'} thumbnail={MenuIcon.Folder}/>
 }
 
 export default SNSIcon;

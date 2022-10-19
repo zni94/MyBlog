@@ -1,10 +1,10 @@
-import Window from "../components/Window";
-import {closePage} from "../store/src/togglePages";
+import Window from "../Window";
+import {closePage} from "../../store/src/togglePages";
 import {useDispatch} from "react-redux";
-import {promise} from "../modules/promise";
-import {popItems} from "../store/src/navItems";
+import {promise} from "../../modules/promise";
+import {popItems} from "../../store/src/navItems";
 import Diary from "../pages/Diary";
-import Diary_Icon from '../lib/icons/Diary_300.png'
+import {MenuIcon} from "../../icons";
 
 const DiaryWindow = () => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const DiaryWindow = () => {
     }
 
     return (
-        <Window title={'Diary'} onClose={onClose} name={'diary'} thumbnail={Diary_Icon}>
+        <Window title={'Diary'} onClose={onClose} name={'diary'} thumbnail={MenuIcon.Folder}>
             <Diary/>
         </Window>
     )
