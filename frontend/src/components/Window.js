@@ -80,44 +80,57 @@ const Window = (props) => {
              onMouseDown={activeHandler}
              draggable={true}
         >
-            <div className={'window-nav-bar'}
-                 onDragStart={dragHandler.onDragStart}
-                 onDragOver={dragHandler.onDragOver}
-                 onDragEnd={dragHandler.onDragEnd}
-                 onDoubleClick={!isMax ? maximizeHandler : minimizeHandler}
-                 draggable={true}>
-                <div className={'window-title'}>
-                    <svg width={18} height={18}>
-                        <image width={18} height={18} href={thumbnail}/>
-                    </svg>
-                    {title}
-                </div>
-                <ul>
-                    <li onMouseDown={hideHandler}>
+            <div className={'window-body'}>
+                <div className={'window-header'}
+                     onDragStart={dragHandler.onDragStart}
+                     onDragOver={dragHandler.onDragOver}
+                     onDragEnd={dragHandler.onDragEnd}
+                     onDoubleClick={!isMax ? maximizeHandler : minimizeHandler}
+                     draggable={true}>
+                    <div className={'window-title'}>
+                        <svg width={18} height={18}>
+                            <image width={18} height={18} href={thumbnail}/>
+                        </svg>
+                        {title}
+                    </div>
+                    <ul>
+                        <li onMouseDown={hideHandler}>
                         <span className="material-symbols-outlined">
                             minimize
                         </span>
-                    </li>
-                    <li onMouseDown={!isMax ? maximizeHandler : minimizeHandler}>
-                        {!isMax ?
-                            <span className="material-symbols-outlined">
+                        </li>
+                        <li onMouseDown={!isMax ? maximizeHandler : minimizeHandler}>
+                            {!isMax ?
+                                <span className="material-symbols-outlined">
                                 magnification_large
                             </span> :
-                            <span className="material-symbols-outlined">
+                                <span className="material-symbols-outlined">
                                 magnification_small
                             </span>
-                        }
-                    </li>
-                    <li onMouseDown={onClose}>
+                            }
+                        </li>
+                        <li onMouseDown={onClose}>
                         <span className="material-symbols-outlined">
                             close
                         </span>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div className={'window-breadcrumb'}>
+
+                </div>
+                <div className={'window-section'}>
+                    <div className={'window-nav'}>
+                        <div className={'window-nav-contents'}></div>
+                    </div>
+                    <div className={'window-contents'}>
+                        {children}
+                    </div>
+                </div>
             </div>
-            <div className={'controlWindow-contents'} draggable={true}>
-                {children}
-            </div>
+            {/*<div className={'controlWindow-contents'} draggable={true}>*/}
+            {/*    {children}*/}
+            {/*</div>*/}
         </div>
     )
 }
