@@ -11,7 +11,7 @@ div.window-container {
   user-select: none;
   resize: both;
   overflow: hidden;
-  box-shadow: 0px 5px 25px 5px #1d1d1d;
+  box-shadow: 0px 3px 25px 3px #1d1d1d;
 
   div.window-body {
     height: 100%;
@@ -87,7 +87,7 @@ div.window-container {
       }
     }
 
-    div.window-breadcrumb {
+    div.window-breadcrumb-container {
       height: 32px;
     }
 
@@ -113,6 +113,24 @@ div.window-container {
         width: 85%;
         overflow: auto;
         padding: 2px;
+
+        div.contents-container {
+          padding: .125rem;
+
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            li:not(:last-child) {
+              margin-right: 0.125rem;
+            }
+          }
+        }
+
       }
     }
   }
@@ -121,30 +139,12 @@ div.window-container {
   //  width: 100%;
   //  height: calc(100% - 28px);
   //
-  //  div.contents-container {
-  //    padding: .625rem;
-  //
-  //    ul {
-  //      list-style: none;
-  //      margin: 0;
-  //      padding: 0;
-  //      display: flex;
-  //      flex-direction: row;
-  //      flex-wrap: wrap;
-  //
-  //      li:not(:last-child) {
-  //        margin-right: 0.25rem;
-  //      }
-  //    }
-  //  }
+
   //}
 }
 
 div.window-container.hide {
-  min-width: 0px !important;
-  min-height: 0px !important;
-  width: 0px !important;
-  height: 0px !important;
+  display: none;
 }
 
 div.window-container.max {
