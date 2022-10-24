@@ -1,12 +1,23 @@
 import '../css/window.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {promise} from "../modules/promise";
 import {addActiveById, addHideById, findParentNode, removeActive} from "../modules/activeControl";
+import {items, translatePath} from "../store/src/fileNavigator";
+import {isNull} from "../modules/isNull";
+import {useDispatch} from "react-redux";
+import {findPath} from "../modules/browserControl";
 
 const Window = (props) => {
-    const {name, title, thumbnail, children, onClose} = props;
+    const {onClose, topHandler, view, path, target, children} = props;
+
+    const dispatch = useDispatch();
 
     const [isMax, setIsMax] = useState(false)
+    const [thumbnail, setThumbnail] = useState(translatePath(path.join('/')).thumbnail)
+
+    useEffect(() => {
+        setThumbnail(translatePath(path.join('/')).thumbnail);
+    }, [view, path])
 
     // DRAG
     const [currPosition, setCurrPosition] = useState({x: 0, y: 0});
@@ -69,17 +80,21 @@ const Window = (props) => {
         addActiveById(e.target, 'windowContainer');
     }
 
+    const onClick = (e) => {
+        findPath(dispatch, e, 'windowContainer');
+    }
+
     return (
         <div className={'window-container'}
              id={'windowContainer'}
-             name={'window-' + name}
+             name={'window-' + view.name}
              style={{
                  left: position.x + 'px',
                  top: position.y + 'px'
              }}
              onMouseDown={activeHandler}
              draggable={true}
-             data-target={name}
+             data-target={target}
         >
             <div className={'window-body'}>
                 <div className={'window-header'}
@@ -90,9 +105,9 @@ const Window = (props) => {
                      draggable={true}>
                     <div className={'window-title'}>
                         <svg width={18} height={18}>
-                            <image width={18} height={18} href={thumbnail}/>
+                            <image width={18} height={18} href={view.thumbnail}/>
                         </svg>
-                        {title}
+                        {view.title}
                     </div>
                     <ul>
                         <li onMouseDown={hideHandler}>
@@ -119,25 +134,61 @@ const Window = (props) => {
                 </div>
                 <div className={'window-breadcrumb-container'}>
                     <div className={'window-breadcrumb-tool'}>
-                        <button className={'window-prev-button'} disabled={true}>
+                        <button className={'window-tool-button'}>
                             <span className={'material-symbols-outlined'}>
-                                arrow_back_ios
+                                arrow_back
                             </span>
                         </button>
-                        <button className={'window-next-button'} disabled={true}>
+                        <button className={'window-tool-button'}>
                             <span className={'material-symbols-outlined'}>
+                                arrow_forward
+                            </span>
+                        </button>
+                        <button className={'window-tool-button'}>
+                            <span className={'material-symbols-outlined'}>
+                                expand_more
+                            </span>
+                        </button>
+                        <button className={'window-tool-button active'} onClick={topHandler}>
+                            <span className={'material-symbols-outlined'}>
+                                 arrow_upward
+                            </span>
+                        </button>
+                        <div className={'window-breadcrumb'}>
+                            <button
+                                className={'window-breadcrumb-thumbnail'}
+                            >
+                                <svg width={14} height={14}>
+                                    <image width={14} height={14} href={thumbnail}/>
+                                </svg>
+                                <span className={'material-symbols-outlined'}>
                                 arrow_forward_ios
                             </span>
-                        </button>
-                        <div className={'window-breadcrumb'}></div>
+                            </button>
+                            {path.map((item, index) => {
+                                const path = items.find(state => state.name === item);
+                                const obj = isNull(path) ? null : translatePath(path.path.join('/'));
+                                return isNull(path) ? null
+                                    : <button
+                                        key={index}
+                                        className={'window-breadcrumb-item'}
+                                        onClick={onClick}
+                                        data-path={path.path.join('/')}
+                                    >{obj.title}
+                                        <span className={'material-symbols-outlined'}>
+                                arrow_forward_ios
+                            </span>
+                                    </button>
+                            })}
+                        </div>
                     </div>
 
                 </div>
                 <div className={'window-section'}>
-                    <div className={'window-nav'}>
-                        <div className={'window-nav-contents'}>
-                        </div>
-                    </div>
+                    {/*<div className={'window-nav'}>*/}
+                    {/*    <div className={'window-nav-contents'}>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className={'window-contents'}>
                         {children}
                     </div>

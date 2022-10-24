@@ -2,22 +2,25 @@ import {useSelector} from "react-redux";
 import '../css/nav.css'
 import TimeZone from "./TimeZone";
 import {promise} from "../modules/promise";
-import {removeActive} from "../modules/activeControl";
+import {removeActive, toggleActiveByName} from "../modules/activeControl";
 import Calendar from "./Calendar";
 
 const NavBar = () => {
     const {items} = useSelector(state => state.navItems);
 
     const hideHandler = (e) => {
-        const name = e.currentTarget.dataset.value;
+        const name = 'window-' + e.currentTarget.dataset.value;
         if (name === 'search') return;
 
-        const container = document.getElementsByName('window-' + name)[0];
+        const container = document.getElementsByName(name)[0];
 
+        console.log('container', container);
+        console.log('name', name);
         promise().then(() => {
             container.classList.remove('hide');
         }).then(() => {
             removeActive('icon-container')
+            toggleActiveByName(container, name)
         })
     }
 

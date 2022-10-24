@@ -1,15 +1,8 @@
-import TStoryIcon from "../Icons/sns/TStoryIcon";
+import ControlPage from "./ControlPage";
+import {sns} from "../../store/src/fileNavigator";
 
 const SNS = () => {
-    return (
-        <div className={'contents-container'}>
-            <div className={'contents'}>
-                <ul>
-                    <li><TStoryIcon/></li>
-                </ul>
-            </div>
-        </div>
-    )
+    return <ControlPage obj={sns}/>
 }
 
 export default SNS;

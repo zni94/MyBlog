@@ -17,9 +17,8 @@ export const changePath = (pageName, path) => ({
 })
 
 const initialState = {
-    background: {isBool: true, path: 'C:/background/'},
-    sns: {isBool: false, path: 'C:/background/sns/'},
-    ide: {isBool: false, path: 'C:/background/ide/'},
+    sns: {isBool: false, path: ['C:', 'background', 'sns']},
+    ide: {isBool: false, path: ['C:', 'background', 'ide']},
 }
 
 const togglePages = (state = initialState, action) => {
@@ -28,7 +27,6 @@ const togglePages = (state = initialState, action) => {
             const open_obj = returnState(action.pageName, 'OPEN');
             return {
                 ...state,
-                background: open_obj.background,
                 sns: open_obj.sns,
                 ide: open_obj.ide,
             }
@@ -36,7 +34,6 @@ const togglePages = (state = initialState, action) => {
             const close_obj = returnState(action.pageName, 'CLOSE');
             return {
                 ...state,
-                background: close_obj.background,
                 sns: close_obj.sns,
                 ide: close_obj.ide,
             }
@@ -44,7 +41,6 @@ const togglePages = (state = initialState, action) => {
             const change_path = returnPath(action.pageName, action.path)
             return {
                 ...state,
-                background: change_path.background,
                 sns: change_path.sns,
                 ide: change_path.ide
             }
