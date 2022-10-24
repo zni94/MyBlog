@@ -1,7 +1,7 @@
 import Icon from "../../Icon";
 import {SNSIcon} from "../../../icons";
 
-const NaverIcon = () => {
+const BlogIcon = () => {
     const onDoubleClick = (e) => {
         return window.open('https://blog.naver.com/free_zni', '_blank')
     }
@@ -9,4 +9,4 @@ const NaverIcon = () => {
     return <Icon title={'Naver Blog'} onDoubleClick={onDoubleClick} thumbnail={SNSIcon.Blog}/>
 }
 
-export default NaverIcon
+export default BlogIcon
