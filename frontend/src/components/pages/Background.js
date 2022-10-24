@@ -1,25 +1,24 @@
-import {ide} from "../../store/src/fileNavigator";
 import Icon from "../Icon";
-import {changePath} from "../../store/src/togglePages";
 import {useDispatch} from "react-redux";
-import {findParentNode} from "../../modules/activeControl";
+import {changePath} from "../../store/src/togglePages";
+import {background} from "../../store/src/fileNavigator";
 
-const IDE = () => {
+
+const Background = () => {
     const dispatch = useDispatch();
 
     const onDoubleClick = (e) => {
-        const target = findParentNode(e.target, 'windowContainer').dataset.target;
         const path = e.currentTarget.dataset.path;
 
-        dispatch(changePath(target, path));
+        dispatch(changePath('background', path));
     }
 
     return (
         <div className={'contents-container'}>
             <div className={'contents'}>
                 <ul>
-                    {ide.items.length > 0 &&
-                        ide.items.map((item, index) => (
+                    {background.items.length > 0 &&
+                        background.items.map((item, index) => (
                             item.type === 'folder' ?
                                 <li key={index}>
                                     <Icon onDoubleClick={onDoubleClick} title={item.title} thumbnail={item.thumbnail}
@@ -37,4 +36,4 @@ const IDE = () => {
     )
 }
 
-export default IDE;
+export default Background;

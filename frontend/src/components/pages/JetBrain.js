@@ -1,10 +1,10 @@
-import {ide} from "../../store/src/fileNavigator";
+import {jetBrain} from "../../store/src/fileNavigator";
 import Icon from "../Icon";
 import {changePath} from "../../store/src/togglePages";
 import {useDispatch} from "react-redux";
 import {findParentNode} from "../../modules/activeControl";
 
-const IDE = () => {
+const JetBrain = () => {
     const dispatch = useDispatch();
 
     const onDoubleClick = (e) => {
@@ -18,12 +18,12 @@ const IDE = () => {
         <div className={'contents-container'}>
             <div className={'contents'}>
                 <ul>
-                    {ide.items.length > 0 &&
-                        ide.items.map((item, index) => (
+                    {jetBrain.items.length > 0 &&
+                        jetBrain.items.map((item, index) => (
                             item.type === 'folder' ?
                                 <li key={index}>
                                     <Icon onDoubleClick={onDoubleClick} title={item.title} thumbnail={item.thumbnail}
-                                          path={item.path}/>
+                                          targetpath={item.path}/>
                                 </li> :
                                 <li key={index}>
                                     <Icon onDoubleClick={onDoubleClick} title={item.title} thumbnail={item.thumbnail}
@@ -37,4 +37,4 @@ const IDE = () => {
     )
 }
 
-export default IDE;
+export default JetBrain;

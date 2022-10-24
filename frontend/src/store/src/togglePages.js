@@ -1,5 +1,6 @@
 export const OPEN = 'OPEN/PAGE';
 export const CLOSE = 'CLOSE/PAGE';
+export const CHANGE = 'CHANGE/PATH';
 
 export const openPage = (pageName) => ({
     type: OPEN,
@@ -7,15 +8,18 @@ export const openPage = (pageName) => ({
 })
 export const closePage = (pageName) => ({
     type: CLOSE,
-    pageName
+    pageName,
+})
+export const changePath = (pageName, path) => ({
+    type: CHANGE,
+    pageName,
+    path,
 })
 
 const initialState = {
-    profile: false,
-    diary: false,
-    game: false,
-    sns: false,
-    ide: false,
+    background: {isBool: true, path: 'C:/background/'},
+    sns: {isBool: false, path: 'C:/background/sns/'},
+    ide: {isBool: false, path: 'C:/background/ide/'},
 }
 
 const togglePages = (state = initialState, action) => {
@@ -24,9 +28,7 @@ const togglePages = (state = initialState, action) => {
             const open_obj = returnState(action.pageName, 'OPEN');
             return {
                 ...state,
-                profile: open_obj.profile,
-                diary: open_obj.diary,
-                game: open_obj.game,
+                background: open_obj.background,
                 sns: open_obj.sns,
                 ide: open_obj.ide,
             }
@@ -34,11 +36,17 @@ const togglePages = (state = initialState, action) => {
             const close_obj = returnState(action.pageName, 'CLOSE');
             return {
                 ...state,
-                profile: close_obj.profile,
-                diary: close_obj.diary,
-                game: close_obj.game,
+                background: close_obj.background,
                 sns: close_obj.sns,
                 ide: close_obj.ide,
+            }
+        case CHANGE:
+            const change_path = returnPath(action.pageName, action.path)
+            return {
+                ...state,
+                background: change_path.background,
+                sns: change_path.sns,
+                ide: change_path.ide
             }
         default:
             return state
@@ -52,17 +60,28 @@ const returnState = (pageName, type) => {
     switch (type) {
         case "OPEN":
             keys.forEach(key => {
-                if (key === pageName) state[key] = true;
+                if (key === pageName) state[key].isBool = true;
             })
             break;
         case "CLOSE":
             keys.forEach(key => {
-                if (key === pageName) state[key] = false;
+                if (key === pageName) state[key].isBool = false;
             })
             break;
         default:
             break;
     }
+
+    return state;
+}
+
+const returnPath = (pageName, path) => {
+    const state = initialState;
+    const keys = Object.keys(initialState);
+
+    keys.forEach(key => {
+        if (key === pageName) state[key].path = path;
+    })
 
     return state;
 }

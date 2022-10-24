@@ -1,26 +1,27 @@
 import Window from "../Window";
-import {useDispatch, useSelector} from "react-redux";
 import {closePage} from "../../store/src/togglePages";
+import {useDispatch, useSelector} from "react-redux";
 import {promise} from "../../modules/promise";
 import {popItems} from "../../store/src/navItems";
-import {items} from "../../store/src/fileNavigator";
+import {background, items} from "../../store/src/fileNavigator";
 import {useEffect, useState} from "react";
 
-const IDEWindow = () => {
+
+const BackgroundWindow = () => {
     const dispatch = useDispatch();
 
-    const {ide} = useSelector(state => state.togglePages);
-    const [page, setPage] = useState(items.find(state => state.path === ide.path));
+    const {background} = useSelector(state => state.togglePages);
+    const [page, setPage] = useState(items.find(state => state.path === background.path));
 
     useEffect(() => {
-        setPage(items.find(state => state.path === ide.path))
-    }, [ide.path])
+        setPage(items.find(state => state.path === background.path))
+    }, [background.path])
 
     const onClose = (e) => {
         promise().then(() => {
-            dispatch(closePage('ide'))
+            dispatch(closePage('background'))
         }).then(() => {
-            dispatch(popItems('ide'))
+            dispatch(popItems('background'))
         })
     }
 
@@ -31,4 +32,4 @@ const IDEWindow = () => {
     )
 }
 
-export default IDEWindow;
+export default BackgroundWindow;

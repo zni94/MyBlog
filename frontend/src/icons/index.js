@@ -1,4 +1,5 @@
 /* Menu Icons */
+import Home from './background/Home.png';
 import Search from './background/Search.png';
 import Folder from './background/Folder.png';
 /* Game Icons */
@@ -13,6 +14,7 @@ import WebStorm from './ide/WebStorm.png'
 import IntelliJ from './ide/IntelliJ.png'
 
 export const MenuIcon = {
+    Home: Home,
     Search: Search,
     Folder: Folder
 }

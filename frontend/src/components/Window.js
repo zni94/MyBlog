@@ -4,7 +4,7 @@ import {promise} from "../modules/promise";
 import {addActiveById, addHideById, findParentNode, removeActive} from "../modules/activeControl";
 
 const Window = (props) => {
-    const {thumbnail, title, onClose, children, name} = props;
+    const {name, title, thumbnail, children, onClose} = props;
 
     const [isMax, setIsMax] = useState(false)
 
@@ -79,6 +79,7 @@ const Window = (props) => {
              }}
              onMouseDown={activeHandler}
              draggable={true}
+             data-target={name}
         >
             <div className={'window-body'}>
                 <div className={'window-header'}
@@ -109,28 +110,39 @@ const Window = (props) => {
                             </span>
                             }
                         </li>
-                        <li onMouseDown={onClose}>
+                        <li onClick={onClose}>
                         <span className="material-symbols-outlined">
                             close
                         </span>
                         </li>
                     </ul>
                 </div>
-                <div className={'window-breadcrumb'}>
+                <div className={'window-breadcrumb-container'}>
+                    <div className={'window-breadcrumb-tool'}>
+                        <button className={'window-prev-button'} disabled={true}>
+                            <span className={'material-symbols-outlined'}>
+                                arrow_back_ios
+                            </span>
+                        </button>
+                        <button className={'window-next-button'} disabled={true}>
+                            <span className={'material-symbols-outlined'}>
+                                arrow_forward_ios
+                            </span>
+                        </button>
+                        <div className={'window-breadcrumb'}></div>
+                    </div>
 
                 </div>
                 <div className={'window-section'}>
                     <div className={'window-nav'}>
-                        <div className={'window-nav-contents'}></div>
+                        <div className={'window-nav-contents'}>
+                        </div>
                     </div>
                     <div className={'window-contents'}>
                         {children}
                     </div>
                 </div>
             </div>
-            {/*<div className={'controlWindow-contents'} draggable={true}>*/}
-            {/*    {children}*/}
-            {/*</div>*/}
         </div>
     )
 }

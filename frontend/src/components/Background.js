@@ -1,36 +1,26 @@
 import NavBar from "./NavBar";
 import {useSelector} from "react-redux";
 import Modal from "./Modal";
-import DiaryIcon from "./Icons/menus/DiaryIcon";
-import ProfileIcon from "./Icons/menus/ProfileIcon";
 import '../css/background.css';
-import GameIcon from "./Icons/menus/GameIcon";
-import SNSIcon from "./Icons/menus/SNSIcon";
-import DiaryWindow from "./windows/DiaryWindow";
-import IDEIcon from "./Icons/menus/IDEIcon";
-import ProfileWindow from "./windows/ProfileWindow";
-import GameWindow from "./windows/GameWindow";
 import SNSWindow from "./windows/SNSWindow";
+import SNSIcon from "./Icons/menus/SNSIcon";
+import BackgroundWindow from "./windows/BackgroundWindow";
+import IDEIcon from "./Icons/menus/IDEIcon";
 import IDEWindow from "./windows/IDEWindow";
 
 const Background = () => {
-    const {diary, profile, game, sns, ide} = useSelector(state => state.togglePages);
+    const {background, sns, ide} = useSelector(state => state.togglePages);
     const {isModal} = useSelector(state => state.toggleModal);
 
     const Icons = [
-        {icon: <DiaryIcon key={0}/>},
-        {icon: <ProfileIcon key={1}/>},
-        {icon: <GameIcon key={2}/>},
-        {icon: <SNSIcon key={3}/>},
-        {icon: <IDEIcon key={4}/>},
+        {icon: <SNSIcon key={0}/>},
+        {icon: <IDEIcon key={1}/>},
     ]
 
     const Windows = [
-        {bool: diary, window: <DiaryWindow key={0}/>},
-        {bool: profile, window: <ProfileWindow key={1}/>},
-        {bool: game, window: <GameWindow key={2}/>},
-        {bool: sns, window: <SNSWindow key={3}/>},
-        {bool: ide, window: <IDEWindow key={4}/>}
+        {bool: background.isBool, window: <BackgroundWindow key={0}/>},
+        {bool: sns.isBool, window: <SNSWindow key={1}/>},
+        {bool: ide.isBool, window: <IDEWindow key={2}/>},
     ]
 
     return (

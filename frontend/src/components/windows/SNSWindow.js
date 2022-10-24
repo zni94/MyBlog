@@ -1,13 +1,20 @@
 import Window from "../Window";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {closePage} from "../../store/src/togglePages";
 import {promise} from "../../modules/promise";
 import {popItems} from "../../store/src/navItems";
-import SNS from "../pages/SNS";
-import {MenuIcon} from "../../icons";
+import {items, sns} from "../../store/src/fileNavigator";
+import {useEffect, useState} from "react";
 
 const SNSWindow = () => {
     const dispatch = useDispatch();
+
+    const {sns} = useSelector(state => state.togglePages);
+    const [page, setPage] = useState(items.find(state => state.path === sns.path));
+
+    useEffect(() => {
+        setPage(items.find(state => state.path === sns.path))
+    }, [sns.path])
 
     const onClose = (e) => {
         promise().then(() => {
@@ -18,8 +25,8 @@ const SNSWindow = () => {
     }
 
     return (
-        <Window title={'SNS'} onClose={onClose} name={'sns'} thumbnail={MenuIcon.Folder}>
-            <SNS/>
+        <Window onClose={onClose} name={page.name} title={page.title} thumbnail={page.thumbnail}>
+            {page.contents}
         </Window>
     )
 }
