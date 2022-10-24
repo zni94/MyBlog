@@ -4,7 +4,7 @@ import {promise} from "../modules/promise";
 import {addActiveById, addHideById, findParentNode, removeActive} from "../modules/activeControl";
 
 const Window = (props) => {
-    const {thumbnail, title, onClose, children, name} = props;
+    const {name, title, thumbnail, children, onClose} = props;
 
     const [isMax, setIsMax] = useState(false)
 
@@ -79,6 +79,7 @@ const Window = (props) => {
              }}
              onMouseDown={activeHandler}
              draggable={true}
+             data-target={name}
         >
             <div className={'window-body'}>
                 <div className={'window-header'}
@@ -142,9 +143,6 @@ const Window = (props) => {
                     </div>
                 </div>
             </div>
-            {/*<div className={'controlWindow-contents'} draggable={true}>*/}
-            {/*    {children}*/}
-            {/*</div>*/}
         </div>
     )
 }

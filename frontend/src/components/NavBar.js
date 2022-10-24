@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import '../css/nav.css'
 import TimeZone from "./TimeZone";
 import {promise} from "../modules/promise";
-import {removeActive, toggleActiveByName} from "../modules/activeControl";
+import {removeActive} from "../modules/activeControl";
 import Calendar from "./Calendar";
 
 const NavBar = () => {
@@ -18,7 +18,6 @@ const NavBar = () => {
             container.classList.remove('hide');
         }).then(() => {
             removeActive('icon-container')
-            toggleActiveByName('window-container', 'window-' + name);
         })
     }
 

@@ -2,7 +2,7 @@ import '../css/icon.css'
 import {addActiveById, removeActive} from "../modules/activeControl";
 
 const Icon = (props) => {
-    const {onDoubleClick, thumbnail, title} = props;
+    const {onDoubleClick, thumbnail, title, target, path} = props;
 
     const onMouseDown = (e) => {
         removeActive('icon-container')
@@ -14,6 +14,8 @@ const Icon = (props) => {
              id={'iconContainer'}
              onDoubleClick={onDoubleClick}
              onMouseDown={onMouseDown}
+             data-target={target}
+             data-path={path}
         >
             <button className={'icon-image'}>
                 <svg width={50} height={50}>
