@@ -11,6 +11,7 @@ div.window-container {
   user-select: none;
   resize: both;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .2);
   box-shadow: 0px 3px 25px 3px #1d1d1d;
 
   div.window-body {
@@ -181,21 +182,11 @@ div.window-container {
 
     div.window-section {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       position: relative;
-      height: calc(100% - (32px + 32px));
+      height: calc(100% - (32px + 50px));
       overflow: hidden;
-
-      div.window-nav {
-        width: 15%;
-        overflow: auto;
-        padding: 1px;
-
-        div.window-nav-contents {
-          height: 100%;
-          border-right: solid 2px #2b2b2b;
-        }
-      }
+      justify-content: space-between;
 
       div.window-contents {
         width: 85%;
@@ -218,17 +209,19 @@ div.window-container {
             }
           }
         }
+      }
 
+      div.window-footer {
+        border-top: 1px solid rgba(255, 255, 255, .2);
+        background-color: rgba(0, 0, 0, .05);
+        border-radius: 0 0 5px 5px;
+        padding: 4px 12px;
+        font-size: .75rem;
+        font-weight: 100;
+        color: rgba(255, 255, 255, .8);
       }
     }
   }
-
-  //div.controlWindow-contents {
-  //  width: 100%;
-  //  height: calc(100% - 28px);
-  //
-
-  //}
 }
 
 div.window-container.hide {
@@ -238,8 +231,8 @@ div.window-container.hide {
 div.window-container.max {
   left: 0px !important;
   top: 0px !important;
-  width: 100%;
-  height: calc(100% - 50px);
+  width: 100% !important;
+  height: calc(100% - 50px) !important;
   resize: none;
 }
 

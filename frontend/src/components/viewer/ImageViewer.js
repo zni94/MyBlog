@@ -1,23 +1,13 @@
 import '../css/window.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {promise} from "../modules/promise";
 import {addActiveById, addHideById, findParentNode, removeActive} from "../modules/activeControl";
-import {items, translatePath} from "../store/src/fileNavigator";
-import {isNull} from "../modules/isNull";
-import {useDispatch} from "react-redux";
-import {findPath} from "../modules/browserControl";
+import {Document_Icons} from "../../icons";
 
-const Window = (props) => {
-    const {onClose, topHandler, view, path, target, children} = props;
-
-    const dispatch = useDispatch();
+const ImageViewer = (props) => {
+    const {onClose, view, target, children} = props;
 
     const [isMax, setIsMax] = useState(false)
-    const [thumbnail, setThumbnail] = useState(translatePath(path.join('/')).thumbnail)
-
-    useEffect(() => {
-        setThumbnail(translatePath(path.join('/')).thumbnail);
-    }, [view, path])
 
     // DRAG
     const [currPosition, setCurrPosition] = useState({x: 0, y: 0});
@@ -80,10 +70,6 @@ const Window = (props) => {
         addActiveById(e.target, 'windowContainer');
     }
 
-    const onClick = (e) => {
-        findPath(dispatch, e, 'windowContainer');
-    }
-
     return (
         <div className={'window-container'}
              id={'windowContainer'}
@@ -105,7 +91,7 @@ const Window = (props) => {
                      draggable={true}>
                     <div className={'window-title'}>
                         <svg width={18} height={18}>
-                            <image width={18} height={18} href={view.thumbnail}/>
+                            <image width={18} height={18} href={Document_Icons.Picture}/>
                         </svg>
                         {view.title}
                     </div>
@@ -132,64 +118,9 @@ const Window = (props) => {
                         </li>
                     </ul>
                 </div>
-                <div className={'window-breadcrumb-container'}>
-                    <div className={'window-breadcrumb-tool'}>
-                        <button className={'window-tool-button'}>
-                            <span className={'material-symbols-outlined'}>
-                                arrow_back
-                            </span>
-                        </button>
-                        <button className={'window-tool-button'}>
-                            <span className={'material-symbols-outlined'}>
-                                arrow_forward
-                            </span>
-                        </button>
-                        <button className={'window-tool-button'}>
-                            <span className={'material-symbols-outlined'}>
-                                expand_more
-                            </span>
-                        </button>
-                        <button className={'window-tool-button active'} onClick={topHandler}>
-                            <span className={'material-symbols-outlined'}>
-                                 arrow_upward
-                            </span>
-                        </button>
-                        <div className={'window-breadcrumb'}>
-                            <button
-                                className={'window-breadcrumb-thumbnail'}
-                            >
-                                <svg width={14} height={14}>
-                                    <image width={14} height={14} href={thumbnail}/>
-                                </svg>
-                                <span className={'material-symbols-outlined'}>
-                                arrow_forward_ios
-                            </span>
-                            </button>
-                            {path.map((item, index) => {
-                                const path = items.find(state => state.name === item);
-                                const obj = isNull(path) ? null : translatePath(path.path.join('/'));
-                                return isNull(path) ? null
-                                    : <button
-                                        key={index}
-                                        className={'window-breadcrumb-item'}
-                                        onClick={onClick}
-                                        data-path={path.path.join('/')}
-                                    >{obj.title}
-                                        <span className={'material-symbols-outlined'}>
-                                arrow_forward_ios
-                            </span>
-                                    </button>
-                            })}
-                        </div>
-                    </div>
-
-                </div>
                 <div className={'window-section'}>
                     <div className={'window-contents'}>
                         {children}
-                    </div>
-                    <div className={'window-footer'}>
-                        {view.items.length}개 항목 │
                     </div>
                 </div>
             </div>
@@ -197,4 +128,4 @@ const Window = (props) => {
     )
 }
 
-export default Window
+export default ImageViewer

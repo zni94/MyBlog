@@ -19,6 +19,7 @@ export const changePath = (pageName, path) => ({
 const initialState = {
     sns: {isBool: false, path: ['C:', 'background', 'sns']},
     ide: {isBool: false, path: ['C:', 'background', 'ide']},
+    document: {isBool: false, path: ['C:', 'background', 'document']},
 }
 
 const togglePages = (state = initialState, action) => {
@@ -29,6 +30,7 @@ const togglePages = (state = initialState, action) => {
                 ...state,
                 sns: open_obj.sns,
                 ide: open_obj.ide,
+                document: open_obj.document,
             }
         case CLOSE:
             const close_obj = returnState(action.pageName, 'CLOSE');
@@ -36,13 +38,15 @@ const togglePages = (state = initialState, action) => {
                 ...state,
                 sns: close_obj.sns,
                 ide: close_obj.ide,
+                document: close_obj.document,
             }
         case CHANGE:
             const change_path = returnPath(action.pageName, action.path)
             return {
                 ...state,
                 sns: change_path.sns,
-                ide: change_path.ide
+                ide: change_path.ide,
+                document: change_path.document,
             }
         default:
             return state

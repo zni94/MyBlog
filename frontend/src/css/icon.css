@@ -28,10 +28,17 @@ div.icon-container button.icon-image .material-symbols-outlined {
   transition: all 0.5s;
 }
 div.icon-container label.icon-name {
-  padding: 0.125rem;
+  padding: 2px;
   color: black;
   font-size: 0.8rem;
   font-weight: 400;
+  text-align: center;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  width: 74px;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
 div.icon-container:hover {
@@ -40,6 +47,10 @@ div.icon-container:hover {
 
 div.icon-container.active {
   background-color: rgba(255, 255, 255, 0.2);
+}
+div.icon-container.active label.icon-name {
+  text-overflow: initial;
+  white-space: normal;
 }
 
 /* In contents */

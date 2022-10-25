@@ -35,10 +35,17 @@ div.icon-container {
   }
 
   label.icon-name {
-    padding: .125rem;
+    padding: 2px;
     color: black;
     font-size: .8rem;
     font-weight: 400;
+    text-align: center;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+    width: 74px;
+    white-space: nowrap;
+    vertical-align: middle;
   }
 }
 
@@ -48,6 +55,11 @@ div.icon-container:hover {
 
 div.icon-container.active {
   background-color: rgba(255, 255, 255, .2);
+
+  label.icon-name {
+    text-overflow: initial;
+    white-space: normal;
+  }
 }
 
 /* In contents */
