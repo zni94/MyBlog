@@ -1,4 +1,4 @@
-import {MenuIcon} from "../../icons";
+import {Menu_Icons} from "../../icons";
 
 export const PUSH = 'PUSH/ITEMS';
 export const POP = 'POP/ITEMS';
@@ -14,7 +14,7 @@ export const popItems = (name) => ({
 
 const initialState = {
     items: [
-        {name: 'search', thumbnail: MenuIcon.Search}
+        {name: 'search', thumbnail: Menu_Icons.Search}
     ]
 }
 

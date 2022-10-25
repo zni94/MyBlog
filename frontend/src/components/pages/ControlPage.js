@@ -23,7 +23,7 @@ const ControlPage = (props) => {
                                           path={item.path.join('/')}/>
                                 </li> :
                                 <li key={index}>
-                                    {item.file}
+                                    {item.component}
                                 </li>
                         ))
                     }

@@ -16,7 +16,7 @@ const ControlWindow = (props) => {
 
     useEffect(() => {
         setPage(findPage(obj))
-    }, [obj.path])
+    }, [obj, obj.path])
 
     const onClose = (e) => {
         promise().then(() => {

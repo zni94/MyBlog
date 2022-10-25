@@ -10,17 +10,15 @@ const NavBar = () => {
 
     const hideHandler = (e) => {
         const name = 'window-' + e.currentTarget.dataset.value;
-        if (name === 'search') return;
+        if (name === 'window-search') return;
 
         const container = document.getElementsByName(name)[0];
 
-        console.log('container', container);
-        console.log('name', name);
         promise().then(() => {
             container.classList.remove('hide');
         }).then(() => {
             removeActive('icon-container')
-            toggleActiveByName(container, name)
+            toggleActiveByName('window-container', name)
         })
     }
 

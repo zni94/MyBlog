@@ -1,5 +1,4 @@
 import {useSelector} from "react-redux";
-import {sns} from "../../store/src/fileNavigator";
 import ControlWindow from "./ControlWindow";
 
 const SNSWindow = () => {
