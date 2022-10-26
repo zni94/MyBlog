@@ -7,7 +7,7 @@ import {Document_Icons} from "../../icons";
 const ImageViewer = (props) => {
     const {onClose, view, target, children} = props;
 
-    const [isMax, setIsMax] = useState(false)
+    const [isMax, setIsMax] = useState(false);
 
     // DRAG
     const [currPosition, setCurrPosition] = useState({x: 0, y: 0});

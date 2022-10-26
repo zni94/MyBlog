@@ -1,38 +1,38 @@
-import {Menu_Icons} from "../../icons";
+import { Menu_Icons } from '../../icons';
 
-export const PUSH = 'PUSH/ITEMS';
-export const POP = 'POP/ITEMS';
+const PUSH = 'PUSH/NAV';
+const POP = 'POP/NAV';
 
-export const pushItems = (obj) => ({
-    type: PUSH,
-    obj
-})
-export const popItems = (name) => ({
-    type: POP,
-    name
-})
+export const pushNav = (obj) => ({
+  type: PUSH,
+  obj,
+});
+export const popNav = (name) => ({
+  type: POP,
+  name,
+});
 
 const initialState = {
-    items: [
-        {name: 'search', thumbnail: Menu_Icons.Search}
-    ]
-}
+  taskBar: { pageName: 'task', thumbnail: Menu_Icons.TaskBar },
+  search: { pageName: 'search', thumbnail: Menu_Icons.Search },
+  items: [],
+};
 
 const navItems = (state = initialState, action) => {
-    switch (action.type) {
-        case PUSH:
-            return {
-                ...state,
-                items: state.items.concat(action.obj)
-            };
-        case POP:
-            return {
-                ...state,
-                items: state.items.filter(state => state.name !== action.name)
-            }
-        default:
-            return state;
-    }
-}
+  switch (action.type) {
+    case PUSH:
+      return {
+        ...state,
+        items: [...state.items, action.obj],
+      };
+    case POP:
+      return {
+        ...state,
+        items: state.items.filter((state) => state.name !== action.name),
+      };
+    default:
+      return state;
+  }
+};
 
 export default navItems;

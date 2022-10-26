@@ -1,49 +1,61 @@
-import {useSelector} from "react-redux";
-import '../css/nav.css'
-import TimeZone from "./TimeZone";
-import {promise} from "../modules/promise";
-import {removeActive, toggleActiveByName} from "../modules/activeControl";
-import Calendar from "./Calendar";
+import { useSelector } from 'react-redux';
+import '../css/nav.css';
+import TimeZone from './TimeZone';
+import { promise } from '../modules/promise';
+import { removeActive, toggleActiveByName } from '../modules/activeControl';
+import Calendar from './Calendar';
 
 const NavBar = () => {
-    const {items} = useSelector(state => state.navItems);
+  const { taskBar, search } = useSelector((state) => state.navItems);
+  const { tasks } = useSelector((state) => state.toggleItems);
 
-    const hideHandler = (e) => {
-        const name = 'window-' + e.currentTarget.dataset.value;
-        if (name === 'window-search') return;
+  const hideHandler = (e) => {
+    const pageName = 'window-' + e.currentTarget.dataset.value;
+    const container = document.getElementsByName(pageName)[0];
 
-        const container = document.getElementsByName(name)[0];
+    promise()
+      .then(() => {
+        container.classList.remove('hide');
+      })
+      .then(() => {
+        removeActive('icon-container');
+        toggleActiveByName('window-container', pageName);
+      });
+  };
 
-        promise().then(() => {
-            container.classList.remove('hide');
-        }).then(() => {
-            removeActive('icon-container')
-            toggleActiveByName('window-container', name)
-        })
-    }
-
-    return (
-        <>
-            <Calendar/>
-            <div className={'nav-container'}>
-                <ul className={'menu-items'}>
-                    {items.length > 0 &&
-                        items.map((contents, index) => (
-                            <li key={index}
-                                className={'menu-item'}
-                                data-value={contents.name}
-                                onMouseDown={hideHandler}
-                            >
-                                <svg width={28} height={28}>
-                                    <image width={28} height={28} href={contents.thumbnail}/>
-                                </svg>
-                            </li>)
-                        )}
-                </ul>
-                <TimeZone/>
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <Calendar />
+      <div className={'nav-container'}>
+        <ul className={'menu-items'}>
+          <li className={'menu-item'} data-value={taskBar.pageName}>
+            <svg width={28} height={28}>
+              <image width={28} height={28} href={taskBar.thumbnail} />
+            </svg>
+          </li>
+          <li className={'menu-item'} data-value={search.pageName}>
+            <svg width={28} height={28}>
+              <image width={28} height={28} href={search.thumbnail} />
+            </svg>
+          </li>
+          {tasks.length > 0 &&
+            tasks.map((contents, index) => (
+              <li
+                key={index}
+                className={'menu-item'}
+                data-value={contents.pageName}
+                onMouseDown={hideHandler}
+              >
+                <svg width={28} height={28}>
+                  <image width={28} height={28} href={contents.thumbnail} />
+                </svg>
+              </li>
+            ))}
+        </ul>
+        <TimeZone />
+      </div>
+    </>
+  );
+};
 
 export default NavBar;

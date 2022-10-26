@@ -1,0 +1,40 @@
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+div.logon-container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+div.logoff-container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+div.logoff-container div.time-zone {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+div.logoff-container div.time-zone div#time {
+  font-weight: 700;
+  font-size: 10rem;
+  letter-spacing: 0.85rem;
+}
+div.logoff-container div.time-zone div#date {
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.125rem;
+}
+
+/*# sourceMappingURL=logon.css.map */
