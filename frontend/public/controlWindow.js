@@ -1,0 +1,3 @@
+window.oncontextmenu = () => {
+    return false;
+}

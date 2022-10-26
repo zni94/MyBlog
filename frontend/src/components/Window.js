@@ -182,7 +182,6 @@ const Window = (props) => {
                             })}
                         </div>
                     </div>
-
                 </div>
                 <div className={'window-section'}>
                     <div className={'window-contents'}>
