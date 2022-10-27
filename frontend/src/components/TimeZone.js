@@ -3,6 +3,7 @@ import { promise } from '../modules/promise';
 import { removeActive } from '../modules/activeControl';
 
 const TimeZone = () => {
+  const [calendar, setCalendar] = useState(false);
   const [date, setDate] = useState(new Date());
 
   const [hours, setHours] = useState(date.getHours());
@@ -21,18 +22,16 @@ const TimeZone = () => {
     return () => clearInterval(times);
   }, [date, hours, minutes, seconds]);
 
-  const onMouseDown = () => {
+  const onClick = () => {
     removeActive('icon-container');
     removeActive('window-container');
 
-    const calendar = document.getElementsByClassName('react-calendar')[0];
-    calendar.classList.contains('hide')
-      ? calendar.classList.remove('hide')
-      : calendar.classList.add('hide');
+    const calendarEle = document.getElementsByClassName('react-calendar')[0];
+    calendarEle.style.right = '10px';
   };
 
   return (
-    <div className={'time-zone-container'} onMouseDown={onMouseDown}>
+    <div className={'time-zone-container'} onClick={onClick}>
       <div>
         {hours > 12 ? `PM  ${hours - 12}` : `AM  ${hours}`}
         &nbsp;:&nbsp;

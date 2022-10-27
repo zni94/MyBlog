@@ -21,10 +21,10 @@ const Background = () => {
   return (
     <div className={'background-container'}>
       <div className={'background-items'}>{Icons.map((item) => item.icon)}</div>
-      <div className={'layout'}>
+      <div className={'layout'} id={'layout'}>
         {windows.length > 0 && windows.map((item) => item.window)}
-        <NavBar />
       </div>
+      <NavBar />
       {isModal && <Modal />}
     </div>
   );

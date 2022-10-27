@@ -4,4 +4,10 @@ div.background-container {
   div.background-items {
     position: absolute;
   }
+
+  div.layout {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 50px);
+  }
 }

@@ -4,10 +4,14 @@ import TimeZone from './TimeZone';
 import { promise } from '../modules/promise';
 import { removeActive, toggleActiveByName } from '../modules/activeControl';
 import Calendar from './Calendar';
+import { useState } from 'react';
 
 const NavBar = () => {
   const { taskBar, search } = useSelector((state) => state.navItems);
   const { tasks } = useSelector((state) => state.toggleItems);
+
+  const [task, setTask] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   const hideHandler = (e) => {
     const pageName = 'window-' + e.currentTarget.dataset.value;
@@ -23,12 +27,54 @@ const NavBar = () => {
       });
   };
 
+  const clickEvent = () => {
+    const taskEle = document.getElementById('task');
+    setTask(false);
+    taskEle.style.bottom = '-580px';
+  };
+
+  const taskHandler = (e) => {
+    const taskEle = document.getElementById('task');
+    if (!task) {
+      setTask(true);
+      taskEle.style.bottom = '60px';
+
+      document.getElementById('layout').addEventListener('click', clickEvent);
+    } else {
+      setTask(false);
+      taskEle.style.bottom = '-580px';
+
+      document
+        .getElementById('layout')
+        .removeEventListener('click', clickEvent);
+    }
+  };
+
   return (
     <>
+      <div className={'nav-task-container'} id={'task'}>
+        <div className={'nav-task-header'}></div>
+        <div className={'nav-task-section'}></div>
+        <div className={'nav-task-footer'}>
+          <button>
+            <span className={'material-symbols-outlined'}>person</span>
+            <span id={'userName'}>Guest</span>
+          </button>
+          <button>
+            <span className={'material-symbols-outlined'}>
+              power_settings_new
+            </span>
+          </button>
+        </div>
+      </div>
       <Calendar />
       <div className={'nav-container'}>
         <ul className={'menu-items'}>
-          <li className={'menu-item'} data-value={taskBar.pageName}>
+          <li
+            className={'menu-item'}
+            data-value={taskBar.pageName}
+            onClick={taskHandler}
+          >
             <svg width={28} height={28}>
               <image width={28} height={28} href={taskBar.thumbnail} />
             </svg>
