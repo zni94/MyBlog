@@ -14,6 +14,7 @@ const toggleLogon = (state = initialState, action) => {
     case TOGGLE_ON_OFF:
       return {
         ...state,
+        logon: action.state,
       };
     default:
       return state;

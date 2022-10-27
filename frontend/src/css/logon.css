@@ -23,7 +23,7 @@ div.logon-container div.logon-zone {
 }
 div.logon-container div.logon-zone div.profile-zone {
   text-align: center;
-  margin-bottom: 1.125rem;
+  margin-bottom: 2rem;
 }
 div.logon-container div.logon-zone div.profile-zone div.profile-thumbnail {
   margin-bottom: 1.125rem;
@@ -43,7 +43,52 @@ div.logon-container div.logon-zone div.profile-zone div.profile-name {
   letter-spacing: 0.025rem;
 }
 div.logon-container div.logon-zone div.button-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+}
+div.logon-container div.logon-zone div.button-zone input {
+  width: 280px;
+  background-color: #1d1d1d;
+  outline: none;
+  padding: 0.5rem 0.5rem;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  border-bottom: 2px solid #6B69D6;
+  margin-bottom: 1.25rem;
+}
+div.logon-container div.logon-zone div.button-zone button {
+  width: 180px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+div.logon-container div.logon-zone div.button-zone button:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+}
+div.logon-container div.logon-toolbar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+div.logon-container div.logon-toolbar span.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 100, "GRAD" 0, "opsz" 24;
+  color: rgba(255, 255, 255, 0.7);
+}
+div.logon-container div.logon-toolbar:hover {
+  cursor: pointer;
+}
+div.logon-container div.logon-toolbar:hover span.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 48;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 div.logoff-container {

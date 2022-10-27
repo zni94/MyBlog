@@ -4,5 +4,10 @@ div.background-container {
 div.background-container div.background-items {
   position: absolute;
 }
+div.background-container div.layout {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 50px);
+}
 
 /*# sourceMappingURL=background.css.map */
