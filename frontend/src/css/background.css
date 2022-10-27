@@ -3,6 +3,7 @@ div.background-container {
 }
 div.background-container div.background-items {
   position: absolute;
+  z-index: 1;
 }
 div.background-container div.layout {
   position: absolute;

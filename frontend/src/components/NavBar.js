@@ -31,9 +31,15 @@ const NavBar = () => {
     const taskEle = document.getElementById('task');
     setTask(false);
     taskEle.style.bottom = '-580px';
+
+    const inputEle = document.getElementById('searchArea');
+    inputEle.value = '';
   };
 
   const taskHandler = (e) => {
+    removeActive('icon-container');
+    removeActive('window-container');
+
     const taskEle = document.getElementById('task');
     if (!task) {
       setTask(true);
@@ -47,13 +53,26 @@ const NavBar = () => {
       document
         .getElementById('layout')
         .removeEventListener('click', clickEvent);
+
+      const inputEle = document.getElementById('searchArea');
+      inputEle.value = '';
     }
   };
 
   return (
     <>
       <div className={'nav-task-container'} id={'task'}>
-        <div className={'nav-task-header'}></div>
+        <div className={'nav-task-header'}>
+          <div className={'nav-task-search-zone'}>
+            <span className={'material-symbols-outlined'}>search</span>
+            <input
+              id={'searchArea'}
+              type={'text'}
+              spellCheck={false}
+              placeholder={'검색하려면 여기에 입력하세요.'}
+            />
+          </div>
+        </div>
         <div className={'nav-task-section'}></div>
         <div className={'nav-task-footer'}>
           <button>
