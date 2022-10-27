@@ -18,8 +18,8 @@ const Icon = (props) => {
              data-path={path}
         >
             <button className={'icon-image'}>
-                <svg width={50} height={50}>
-                    <image width={50} height={50} href={thumbnail}/>
+                <svg width={36} height={36}>
+                    <image width={36} height={36} href={thumbnail}/>
                 </svg>
             </button>
             <label className={'icon-name'}>

@@ -1,53 +1,71 @@
-import { useEffect, useState } from 'react';
-import { promise } from '../modules/promise';
-import { removeActive } from '../modules/activeControl';
+import {useEffect, useState} from 'react';
+import {promise} from '../modules/promise';
+import {removeActive} from '../modules/activeControl';
 
 const TimeZone = () => {
-  const [calendar, setCalendar] = useState(false);
-  const [date, setDate] = useState(new Date());
+    const [calendar, setCalendar] = useState(false);
+    const [date, setDate] = useState(new Date());
 
-  const [hours, setHours] = useState(date.getHours());
-  const [minutes, setMinutes] = useState(date.getMinutes());
-  const [seconds, setSeconds] = useState(date.getSeconds());
+    const [hours, setHours] = useState(date.getHours());
+    const [minutes, setMinutes] = useState(date.getMinutes());
+    const [seconds, setSeconds] = useState(date.getSeconds());
 
-  useEffect(() => {
-    const times = setInterval(() => {
-      promise(setDate(new Date())).then(() => {
-        setHours(date.getHours());
-        setMinutes(date.getMinutes());
-        setSeconds(date.getSeconds());
-      });
-    }, 1000);
+    useEffect(() => {
+        const times = setInterval(() => {
+            promise(setDate(new Date())).then(() => {
+                setHours(date.getHours());
+                setMinutes(date.getMinutes());
+                setSeconds(date.getSeconds());
+            });
+        }, 1000);
 
-    return () => clearInterval(times);
-  }, [date, hours, minutes, seconds]);
+        return () => clearInterval(times);
+    }, [date, hours, minutes, seconds]);
 
-  const onClick = () => {
-    removeActive('icon-container');
-    removeActive('window-container');
+    const clickEvent = () => {
+        const calendarEle = document.getElementsByClassName('react-calendar')[0];
+        setCalendar(false);
+        calendarEle.style.right = '-340px';
+    };
 
-    const calendarEle = document.getElementsByClassName('react-calendar')[0];
-    calendarEle.style.right = '10px';
-  };
+    const onClick = () => {
+        removeActive('icon-container');
+        removeActive('window-container');
 
-  return (
-    <div className={'time-zone-container'} onClick={onClick}>
-      <div>
-        {hours > 12 ? `PM  ${hours - 12}` : `AM  ${hours}`}
-        &nbsp;:&nbsp;
-        {minutes < 10 ? `0${minutes}` : minutes}
-      </div>
-      <div>
-        {date.getFullYear()}
-        &nbsp;/&nbsp;
-        {date.getUTCMonth() + 1 < 10
-          ? `0${date.getMonth() + 1}`
-          : date.getMonth() + 1}
-        &nbsp;/&nbsp;
-        {date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}
-      </div>
-    </div>
-  );
+        const calendarEle = document.getElementsByClassName('react-calendar')[0];
+        if (!calendar) {
+            setCalendar(true);
+            calendarEle.style.right = '10px';
+
+            document.getElementById('layout').addEventListener('click', clickEvent);
+        } else {
+            setCalendar(false);
+            calendarEle.style.right = '-340px';
+
+            document
+                .getElementById('layout')
+                .removeEventListener('click', clickEvent);
+        }
+    };
+
+    return (
+        <div className={'time-zone-container'} onClick={onClick}>
+            <div>
+                {hours > 12 ? `PM  ${hours - 12}` : `AM  ${hours}`}
+                &nbsp;:&nbsp;
+                {minutes < 10 ? `0${minutes}` : minutes}
+            </div>
+            <div>
+                {date.getFullYear()}
+                &nbsp;/&nbsp;
+                {date.getUTCMonth() + 1 < 10
+                    ? `0${date.getMonth() + 1}`
+                    : date.getMonth() + 1}
+                &nbsp;/&nbsp;
+                {date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}
+            </div>
+        </div>
+    );
 };
 
 export default TimeZone;
