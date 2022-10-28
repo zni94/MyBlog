@@ -5,16 +5,20 @@ import { removeActive, toggleActiveByName } from '../../modules/activeControl';
 import { openPage } from '../../store/src/togglePages';
 import { Menu_Icons } from '../../icons';
 import { pushTask, pushWeb } from '../../store/src/toggleItems';
+import ControlWindow from '../windows/ControlWindow';
+import { isNull } from '../../modules/isNull';
 
-const ControlMenu = (props) => {
-  const { obj, pageName, title } = props;
+const ControlFolder = (props) => {
+  const { obj, path, pageName, title } = props;
   const dispatch = useDispatch();
 
   const onDoubleClick = () => {
-    if (obj.isBool) {
-      removeActive('icon-container');
-      toggleActiveByName('window-container', 'window-' + pageName);
-      return;
+    if (!isNull(obj)) {
+      if (obj.isBool) {
+        removeActive('icon-container');
+        toggleActiveByName('window-container', 'window-' + pageName);
+        return;
+      }
     }
 
     promise()
@@ -25,7 +29,14 @@ const ControlMenu = (props) => {
         dispatch(
           pushWeb({
             pageName: pageName,
-            window: obj.component,
+            window: (
+              <ControlWindow
+                obj={obj}
+                pageName={pageName}
+                defaultPath={path}
+                target={pageName}
+              />
+            ),
           }),
         );
       })
@@ -52,4 +63,4 @@ const ControlMenu = (props) => {
   );
 };
 
-export default ControlMenu;
+export default ControlFolder;

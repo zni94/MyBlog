@@ -1,6 +1,4 @@
-import SNSWindow from '../../components/windows/SNSWindow';
-import IDEWindow from '../../components/windows/IDEWindow';
-import DocumentWindow from '../../components/windows/DocumentWindow';
+import { findPageObj } from '../../modules/browserControl';
 
 export const OPEN = 'OPEN/PAGE';
 export const CLOSE = 'CLOSE/PAGE';
@@ -20,49 +18,35 @@ export const changePath = (pageName, path) => ({
   path,
 });
 
-const initialState = {
-  sns: {
-    isBool: false,
-    path: ['C:', 'background', 'sns'],
-    component: <SNSWindow key={0} target={'sns'} />,
-  },
-  ide: {
-    isBool: false,
-    path: ['C:', 'background', 'ide'],
-    component: <IDEWindow key={1} target={'ide'} />,
-  },
-  document: {
-    isBool: false,
-    path: ['C:', 'background', 'document'],
-    component: <DocumentWindow key={2} target={'document'} />,
-  },
+export const pages = {
+  items: [
+    {
+      pageName: 'ide',
+      isBool: false,
+      path: ['C:', 'background', 'ide'],
+    },
+  ],
 };
 
-const togglePages = (state = initialState, action) => {
+const togglePages = (state = pages, action) => {
   switch (action.type) {
     case OPEN:
-      const open_obj = returnState(action.pageName, 'OPEN');
+      const open_arr = returnState(action.pageName, 'OPEN');
       return {
         ...state,
-        sns: open_obj.sns,
-        ide: open_obj.ide,
-        document: open_obj.document,
+        items: open_arr,
       };
     case CLOSE:
-      const close_obj = returnState(action.pageName, 'CLOSE');
+      const close_arr = returnState(action.pageName, 'CLOSE');
       return {
         ...state,
-        sns: close_obj.sns,
-        ide: close_obj.ide,
-        document: close_obj.document,
+        items: close_arr,
       };
     case CHANGE:
       const change_path = returnPath(action.pageName, action.path);
       return {
         ...state,
-        sns: change_path.sns,
-        ide: change_path.ide,
-        document: change_path.document,
+        items: change_path,
       };
     default:
       return state;
@@ -70,19 +54,15 @@ const togglePages = (state = initialState, action) => {
 };
 
 const returnState = (pageName, type) => {
-  const state = initialState;
-  const keys = Object.keys(initialState);
+  const state = pages.items;
+  const obj = findPageObj(state, pageName);
 
   switch (type) {
     case 'OPEN':
-      keys.forEach((key) => {
-        if (key === pageName) state[key].isBool = true;
-      });
+      obj.isBool = true;
       break;
     case 'CLOSE':
-      keys.forEach((key) => {
-        if (key === pageName) state[key].isBool = false;
-      });
+      obj.isBool = false;
       break;
     default:
       break;
@@ -92,12 +72,10 @@ const returnState = (pageName, type) => {
 };
 
 const returnPath = (pageName, path) => {
-  const state = initialState;
-  const keys = Object.keys(initialState);
+  const state = pages.items;
+  const obj = findPageObj(state, pageName);
 
-  keys.forEach((key) => {
-    if (key === pageName) state[key].path = path;
-  });
+  obj.path = path;
 
   return state;
 };

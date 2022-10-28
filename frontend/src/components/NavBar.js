@@ -5,6 +5,7 @@ import { promise } from '../modules/promise';
 import { removeActive, toggleActiveByName } from '../modules/activeControl';
 import Calendar from './Calendar';
 import { useState } from 'react';
+import { items } from '../store/src/fileNavigator';
 
 const NavBar = () => {
   const { taskBar, search } = useSelector((state) => state.navItems);
@@ -73,7 +74,12 @@ const NavBar = () => {
             />
           </div>
         </div>
-        <div className={'nav-task-section'}></div>
+        <div className={'nav-task-section'}>
+          <ul>
+            {items.length > 0 &&
+              items.map((item, index) => <li key={index}>{item.page}</li>)}
+          </ul>
+        </div>
         <div className={'nav-task-footer'}>
           <button>
             <span className={'material-symbols-outlined'}>person</span>

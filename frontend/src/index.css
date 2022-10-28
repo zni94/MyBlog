@@ -4,6 +4,20 @@ html, body {
     background-color: #8E8CD8;
 }
 
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #8E8CD8;
+}
+
+::-webkit-scrollbar-track {
+    border: none;
+    border-radius: 10px;
+}
+
 html {
     height: 100%;
     position: relative;
