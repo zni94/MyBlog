@@ -18,7 +18,7 @@ const ControlWindow = (props) => {
     setPage(findPage(obj));
   }, [obj, obj.path]);
 
-  const onClose = (e) => {
+  const onClose = () => {
     promise()
       .then(() => {
         dispatch(closePage(pageName));
@@ -48,7 +48,7 @@ const ControlWindow = (props) => {
       path={obj.path}
       target={target}
     >
-      {page.contents}
+      {page.page}
     </Window>
   );
 };

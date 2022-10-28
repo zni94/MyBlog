@@ -44,6 +44,10 @@ div.nav-task-container div.nav-task-header div.nav-task-search-zone input {
   color: white;
   font-size: 0.75rem;
 }
+div.nav-task-container div.nav-task-section {
+  height: 458px;
+  overflow: auto;
+}
 div.nav-task-container div.nav-task-footer {
   display: flex;
   flex-direction: row;

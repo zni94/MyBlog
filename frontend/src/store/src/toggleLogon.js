@@ -6,7 +6,7 @@ export const toggleOnOff = (state) => ({
 });
 
 const initialState = {
-  logon: false,
+  logon: true,
 };
 
 const toggleLogon = (state = initialState, action) => {
