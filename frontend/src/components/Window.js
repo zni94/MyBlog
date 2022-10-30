@@ -13,7 +13,8 @@ import { useDispatch } from 'react-redux';
 import { findPath } from '../modules/browserControl';
 
 const Window = (props) => {
-  const { onClose, topHandler, view, path, target, children } = props;
+  const { onClose, topHandler, navHandler, view, path, target, children } =
+    props;
 
   const dispatch = useDispatch();
 
@@ -178,7 +179,7 @@ const Window = (props) => {
                   <button
                     key={index}
                     className={'window-breadcrumb-item'}
-                    onClick={onClick}
+                    onClick={navHandler}
                     data-path={path.path.join('/')}
                   >
                     {obj.title}

@@ -1,5 +1,5 @@
 import Icon from '../Icon';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { promise } from '../../modules/promise';
 import { removeActive, toggleActiveByName } from '../../modules/activeControl';
 import { openPage } from '../../store/src/togglePages';
@@ -9,12 +9,19 @@ import ControlWindow from '../windows/ControlWindow';
 import { isNull } from '../../modules/isNull';
 
 const ControlFolder = (props) => {
-  const { obj, path, pageName, title } = props;
+  /**
+   * Input Object
+   *   { pageName, isBool, path }
+   *
+   */
+  const { folderObj, path, pageName, title } = props;
+  const { windows } = useSelector((state) => state.toggleItems);
+
   const dispatch = useDispatch();
 
   const onDoubleClick = () => {
-    if (!isNull(obj)) {
-      if (obj.isBool) {
+    if (!isNull(folderObj)) {
+      if (folderObj.isBool) {
         removeActive('icon-container');
         toggleActiveByName('window-container', 'window-' + pageName);
         return;
@@ -31,7 +38,7 @@ const ControlFolder = (props) => {
             pageName: pageName,
             window: (
               <ControlWindow
-                obj={obj}
+                folderObj={folderObj}
                 pageName={pageName}
                 defaultPath={path}
                 target={pageName}
