@@ -1,13 +1,20 @@
-import { IDE_Icons, Menu_Icons } from '../../icons';
-import Background from '../../components/pages/Background';
-import { createObject } from '../../modules/createObject';
-import { pages } from './togglePages';
-import { findPageObj } from '../../modules/browserControl';
+import {IDE_Icons, Menu_Icons} from '../../icons';
+import {createObject} from '../../modules/createObject';
+import {pages} from './togglePages';
 
 /* SNS Part */
 
 /* IDE Part */
-export const jetBrain = createObject(
+const vsCode = createObject(
+  'file',
+  ['C:', 'background', 'ide'],
+  'VSCode',
+  'vscode',
+  IDE_Icons.VSCode,
+  null,
+  [],
+);
+const jetBrain = createObject(
   'folder',
   ['C:', 'background', 'ide', 'jetbrain'],
   'JetBrain',
@@ -16,25 +23,25 @@ export const jetBrain = createObject(
   null,
   [],
 );
-export const ide = createObject(
+const ide = createObject(
   'folder',
   ['C:', 'background', 'ide'],
   'IDE',
   'ide',
   Menu_Icons.Folder,
-  findPageObj(pages.items, 'ide'),
-  [jetBrain],
+  pages.ide,
+  [jetBrain, vsCode],
 );
 
-export const background = {
-  type: 'folder',
-  path: ['C:', 'background'],
-  title: 'Background',
-  name: 'background',
-  thumbnail: Menu_Icons.Home,
-  page: <Background />,
-  items: [ide],
-};
+const background = createObject(
+  'folder',
+  ['C:', 'background'],
+  'Background',
+  'background',
+  Menu_Icons.Folder,
+  null,
+  [ide],
+);
 
 export const items = [jetBrain, ide, background];
 

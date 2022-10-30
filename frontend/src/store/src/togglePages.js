@@ -1,5 +1,3 @@
-import { findPageObj } from '../../modules/browserControl';
-
 export const OPEN = 'OPEN/PAGE';
 export const CLOSE = 'CLOSE/PAGE';
 export const CHANGE = 'CHANGE/PATH';
@@ -19,34 +17,32 @@ export const changePath = (pageName, path) => ({
 });
 
 export const pages = {
-  items: [
-    {
-      pageName: 'ide',
-      isBool: false,
-      path: ['C:', 'background', 'ide'],
-    },
-  ],
+  ide: {
+    pageName: 'ide',
+    isBool: false,
+    path: ['C:', 'background', 'ide'],
+  },
 };
 
 const togglePages = (state = pages, action) => {
   switch (action.type) {
     case OPEN:
-      const open_arr = returnState(action.pageName, 'OPEN');
+      const open_obj = returnState(action.pageName, 'OPEN');
       return {
         ...state,
-        items: open_arr,
+        ide: open_obj.ide,
       };
     case CLOSE:
-      const close_arr = returnState(action.pageName, 'CLOSE');
+      const close_obj = returnState(action.pageName, 'CLOSE');
       return {
         ...state,
-        items: close_arr,
+        ide: close_obj.ide,
       };
     case CHANGE:
       const change_path = returnPath(action.pageName, action.path);
       return {
         ...state,
-        items: change_path,
+        ide: change_path.ide,
       };
     default:
       return state;
@@ -54,15 +50,19 @@ const togglePages = (state = pages, action) => {
 };
 
 const returnState = (pageName, type) => {
-  const state = pages.items;
-  const obj = findPageObj(state, pageName);
+  const state = pages;
+  const keys = Object.keys(pages);
 
   switch (type) {
     case 'OPEN':
-      obj.isBool = true;
+      keys.forEach((key) => {
+        if (key === pageName) state[key].isBool = true;
+      });
       break;
     case 'CLOSE':
-      obj.isBool = false;
+      keys.forEach((key) => {
+        if (key === pageName) state[key].isBool = false;
+      });
       break;
     default:
       break;
@@ -72,10 +72,12 @@ const returnState = (pageName, type) => {
 };
 
 const returnPath = (pageName, path) => {
-  const state = pages.items;
-  const obj = findPageObj(state, pageName);
+  const state = pages;
+  const keys = Object.keys(pages);
 
-  obj.path = path;
+  keys.forEach((key) => {
+    if (key === pageName) state[key].path = path;
+  });
 
   return state;
 };

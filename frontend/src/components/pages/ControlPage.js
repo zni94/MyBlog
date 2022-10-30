@@ -1,28 +1,20 @@
 import Icon from '../Icon';
-import { findPage, findPath } from '../../modules/browserControl';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { isNull } from '../../modules/isNull';
 
 const ControlPage = (props) => {
-  const { obj } = props;
+  /**
+   * Input Object
+   *   { pageName, isBool, path }
+   */
 
-  const dispatch = useDispatch();
-  const [page, setPage] = useState(findPage(obj));
-
-  useEffect(() => {
-    console.log('obj', obj);
-    setPage(findPage(obj));
-  }, [obj, obj.path]);
-
-  const onDoubleClick = (e) => {
-    findPath(dispatch, e, 'windowContainer');
-  };
+  const { page, onDoubleClick } = props;
 
   return (
     <div className={'contents-container'}>
       <div className={'contents'}>
         <ul>
-          {page.items.length > 0 &&
+          {!isNull(page) &&
+            page.items.length > 0 &&
             page.items.map((item, index) =>
               item.type === 'folder' ? (
                 <li key={index}>
