@@ -1,23 +1,15 @@
 import NavBar from './NavBar';
 import { useSelector } from 'react-redux';
 import '../css/background.css';
-import ControlFolder from './folders/ControlFolder';
 import { Fragment } from 'react';
+import { ide } from '../store/src/fileNavigator';
 
 const Background = () => {
-  const { ide } = useSelector((state) => state.togglePages);
   const { windows } = useSelector((state) => state.toggleItems);
 
   const Icons = [
     {
-      icon: (
-        <ControlFolder
-          folderObj={ide}
-          path={['C:', 'background', 'ide']}
-          pageName={'ide'}
-          title={'IDE'}
-        />
-      ),
+      icon: ide.background,
     },
   ];
 

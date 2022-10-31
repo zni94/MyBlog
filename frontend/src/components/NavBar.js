@@ -11,8 +11,7 @@ const NavBar = () => {
   const { taskBar, search } = useSelector((state) => state.navItems);
   const { tasks } = useSelector((state) => state.toggleItems);
 
-  const [task, setTask] = useState(false);
-  const [isSearch, setIsSearch] = useState(false);
+  const [taskList, setTaskList] = useState(items);
 
   const hideHandler = (e) => {
     const pageName = 'window-' + e.currentTarget.dataset.value;
@@ -30,11 +29,16 @@ const NavBar = () => {
 
   const clickEvent = () => {
     const taskEle = document.getElementById('task');
-    setTask(false);
-    taskEle.style.bottom = '-580px';
+    taskEle.classList.remove('active');
 
     const inputEle = document.getElementById('searchArea');
     inputEle.value = '';
+
+    const newTaskList = items.filter((state) =>
+      state.pageName.includes(inputEle.value.toLowerCase()),
+    );
+
+    setTaskList(newTaskList);
   };
 
   const taskHandler = (e) => {
@@ -42,14 +46,12 @@ const NavBar = () => {
     removeActive('window-container');
 
     const taskEle = document.getElementById('task');
-    if (!task) {
-      setTask(true);
-      taskEle.style.bottom = '60px';
+    if (!taskEle.classList.contains('active')) {
+      taskEle.classList.add('active');
 
       document.getElementById('layout').addEventListener('click', clickEvent);
     } else {
-      setTask(false);
-      taskEle.style.bottom = '-580px';
+      taskEle.classList.remove('active');
 
       document
         .getElementById('layout')
@@ -57,7 +59,39 @@ const NavBar = () => {
 
       const inputEle = document.getElementById('searchArea');
       inputEle.value = '';
+
+      const newTaskList = items.filter((state) =>
+        state.pageName.includes(inputEle.value.toLowerCase()),
+      );
+
+      setTaskList(newTaskList);
     }
+  };
+
+  const searchHandler = (e) => {
+    const searchVal = e.currentTarget.value;
+    const newTaskList = items.filter((state) =>
+      state.pageName.includes(searchVal.toLowerCase()),
+    );
+
+    setTaskList(newTaskList);
+  };
+
+  const onClick = () => {
+    const taskEle = document.getElementById('task');
+    taskEle.classList.remove('active');
+
+    const calendarEle = document.getElementsByClassName('react-calendar')[0];
+    calendarEle.classList.remove('active');
+
+    const inputEle = document.getElementById('searchArea');
+    inputEle.value = '';
+
+    const newTaskList = items.filter((state) =>
+      state.pageName.includes(inputEle.value.toLowerCase()),
+    );
+
+    setTaskList(newTaskList);
   };
 
   return (
@@ -71,13 +105,19 @@ const NavBar = () => {
               type={'text'}
               spellCheck={false}
               placeholder={'검색하려면 여기에 입력하세요.'}
+              onChange={searchHandler}
             />
           </div>
         </div>
         <div className={'nav-task-section'}>
+          <div className={'pin'}>고정됨</div>
           <ul>
-            {items.length > 0 &&
-              items.map((item, index) => <li key={index}>{item.page}</li>)}
+            {taskList.length > 0 &&
+              taskList.map((item, index) => (
+                <li key={index} onClick={onClick}>
+                  {item.task}
+                </li>
+              ))}
           </ul>
         </div>
         <div className={'nav-task-footer'}>
@@ -104,7 +144,11 @@ const NavBar = () => {
               <image width={28} height={28} href={taskBar.thumbnail} />
             </svg>
           </li>
-          <li className={'menu-item'} data-value={search.pageName}>
+          <li
+            className={'menu-item'}
+            data-value={search.pageName}
+            onClick={taskHandler}
+          >
             <svg width={28} height={28}>
               <image width={28} height={28} href={search.thumbnail} />
             </svg>
