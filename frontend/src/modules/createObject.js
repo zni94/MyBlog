@@ -4,7 +4,7 @@ import ControlFile from '../components/files/ControlFile';
 import BackgroundFolder from '../components/folders/BackgroundFolder';
 import TaskFolder from '../components/folders/TaskFolder';
 import TaskFile from '../components/files/TaskFile';
-import { spawn } from 'child_process';
+import axios from 'axios';
 
 export const createObject = (
   type,
@@ -76,9 +76,8 @@ export const createObject = (
         <TaskFile
           title={title}
           onClick={() => {
-            const cmd = spawn('cmd.exe', ['c:']);
-            cmd.stdout.on('data', (data) => {
-              console.log('stdout::\n', data);
+            axios.get('/file').then((resp) => {
+              console.log('resp', resp);
             });
           }}
           thumbnail={thumbnail}
