@@ -54,6 +54,28 @@ div.nav-task-container {
   div.nav-task-section {
     height: calc(580px - 71px - 51px);
     overflow: auto;
+    position: relative;
+
+    div.pin {
+      color: white;
+      padding: 0 40px;
+      margin: 1rem 0;
+      font-size: 0.8rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0 20px;
+      margin: 1rem auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      li label {
+        font-weight: 100;
+        color: white;
+      }
+    }
   }
 
   div.nav-task-footer {
@@ -122,6 +144,10 @@ div.nav-task-container {
       background-color: rgba(255, 255, 255, .1);
     }
   }
+}
+
+div.nav-task-container.active {
+  bottom: 60px;
 }
 
 div.nav-container {

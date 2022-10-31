@@ -26,7 +26,7 @@ const ControlPage = (props) => {
                   />
                 </li>
               ) : (
-                <li key={index}>{item.page}</li>
+                <li key={index}>{item.file}</li>
               ),
             )}
         </ul>

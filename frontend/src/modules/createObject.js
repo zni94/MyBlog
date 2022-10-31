@@ -1,13 +1,16 @@
 import ControlPage from '../components/pages/ControlPage';
-import ControlFolder from '../components/folders/ControlFolder';
 import { isNull } from './isNull';
 import ControlFile from '../components/files/ControlFile';
+import BackgroundFolder from '../components/folders/BackgroundFolder';
+import TaskFolder from '../components/folders/TaskFolder';
+import TaskFile from '../components/files/TaskFile';
+import { spawn } from 'child_process';
 
 export const createObject = (
   type,
   path,
   title,
-  name,
+  pageName,
   thumbnail,
   folderObj,
   items,
@@ -16,19 +19,38 @@ export const createObject = (
     type: type,
     path: path,
     title: title,
-    name: name,
+    pageName: pageName,
     thumbnail: thumbnail,
     items: items,
   };
 
   switch (type) {
     case 'folder':
-      const folder = !isNull(folderObj) ? (
-        <ControlFolder folderObj={folderObj} pageName={name} title={title} />
+      const backgroundFolder = !isNull(folderObj) ? (
+        <BackgroundFolder
+          folderObj={folderObj}
+          pageName={pageName}
+          title={title}
+          path={path}
+          thumbnail={thumbnail}
+        />
       ) : (
         <div />
       );
-      fileObj.folder = folder;
+      fileObj.background = backgroundFolder;
+
+      const taskFolder = !isNull(folderObj) ? (
+        <TaskFolder
+          folderObj={folderObj}
+          pageName={pageName}
+          title={title}
+          path={path}
+          thumbnail={thumbnail}
+        />
+      ) : (
+        <div />
+      );
+      fileObj.task = taskFolder;
 
       const page = !isNull(folderObj) ? (
         <ControlPage folderObj={folderObj} />
@@ -48,7 +70,21 @@ export const createObject = (
           thumbnail={thumbnail}
         />
       );
-      fileObj.page = file;
+      fileObj.file = file;
+
+      const taskFile = (
+        <TaskFile
+          title={title}
+          onClick={() => {
+            const cmd = spawn('cmd.exe', ['c:']);
+            cmd.stdout.on('data', (data) => {
+              console.log('stdout::\n', data);
+            });
+          }}
+          thumbnail={thumbnail}
+        />
+      );
+      fileObj.task = taskFile;
 
       break;
     default:

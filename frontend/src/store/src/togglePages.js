@@ -22,6 +22,11 @@ export const pages = {
     isBool: false,
     path: ['C:', 'background', 'ide'],
   },
+  jetbrain: {
+    pageName: 'jetbrain',
+    isBool: false,
+    path: ['C:', 'background', 'ide', 'jetbrain'],
+  },
 };
 
 const togglePages = (state = pages, action) => {
@@ -31,18 +36,21 @@ const togglePages = (state = pages, action) => {
       return {
         ...state,
         ide: open_obj.ide,
+        jetbrain: open_obj.jetbrain,
       };
     case CLOSE:
       const close_obj = returnState(action.pageName, 'CLOSE');
       return {
         ...state,
         ide: close_obj.ide,
+        jetbrain: close_obj.jetbrain,
       };
     case CHANGE:
       const change_path = returnPath(action.pageName, action.path);
       return {
         ...state,
         ide: change_path.ide,
+        jetbrain: change_path.jetbrain,
       };
     default:
       return state;
@@ -51,18 +59,13 @@ const togglePages = (state = pages, action) => {
 
 const returnState = (pageName, type) => {
   const state = pages;
-  const keys = Object.keys(pages);
 
   switch (type) {
     case 'OPEN':
-      keys.forEach((key) => {
-        if (key === pageName) state[key].isBool = true;
-      });
+      state[pageName].isBool = true;
       break;
     case 'CLOSE':
-      keys.forEach((key) => {
-        if (key === pageName) state[key].isBool = false;
-      });
+      state[pageName].isBool = false;
       break;
     default:
       break;
@@ -73,11 +76,10 @@ const returnState = (pageName, type) => {
 
 const returnPath = (pageName, path) => {
   const state = pages;
-  const keys = Object.keys(pages);
 
-  keys.forEach((key) => {
-    if (key === pageName) state[key].path = path;
-  });
+  state[pageName].path = path;
+
+  console.log('state', state);
 
   return state;
 };

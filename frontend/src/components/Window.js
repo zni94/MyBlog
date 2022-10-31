@@ -9,14 +9,10 @@ import {
 } from '../modules/activeControl';
 import { items, translatePath } from '../store/src/fileNavigator';
 import { isNull } from '../modules/isNull';
-import { useDispatch } from 'react-redux';
-import { findPath } from '../modules/browserControl';
 
 const Window = (props) => {
   const { onClose, topHandler, navHandler, view, path, target, children } =
     props;
-
-  const dispatch = useDispatch();
 
   const [isMax, setIsMax] = useState(false);
   const [thumbnail, setThumbnail] = useState(
@@ -34,6 +30,9 @@ const Window = (props) => {
 
   const dragHandler = {
     onDragStart(e) {
+      const parent = findParentNode(e.target, 'windowContainer');
+      parent.style.transition = 'all 0s';
+
       e.dataTransfer.setDragImage(new Image(), 0, 0);
 
       if (isMax) return;
@@ -71,6 +70,7 @@ const Window = (props) => {
         setIsMax(true);
       })
       .then(() => {
+        parent.style.transition = 'all 0.2s';
         parent.classList.add('max');
       });
   };
@@ -83,6 +83,7 @@ const Window = (props) => {
         setIsMax(false);
       })
       .then(() => {
+        parent.style.transition = 'all 0.2s';
         parent.classList.remove('max');
       });
   };
@@ -90,10 +91,6 @@ const Window = (props) => {
   const activeHandler = (e) => {
     removeActive('window-container');
     addActiveById(e.target, 'windowContainer');
-  };
-
-  const onClick = (e) => {
-    findPath(dispatch, e, 'windowContainer');
   };
 
   return (
@@ -171,7 +168,7 @@ const Window = (props) => {
                 </span>
               </button>
               {path.map((item, index) => {
-                const path = items.find((state) => state.name === item);
+                const path = items.find((state) => state.pageName === item);
                 const obj = isNull(path)
                   ? null
                   : translatePath(path.path.join('/'));

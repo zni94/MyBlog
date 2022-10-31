@@ -1,29 +1,29 @@
-import {IDE_Icons, Menu_Icons} from '../../icons';
-import {createObject} from '../../modules/createObject';
-import {pages} from './togglePages';
+import { IDE_Icons, Menu_Icons } from '../../icons';
+import { createObject } from '../../modules/createObject';
+import { pages } from './togglePages';
 
 /* SNS Part */
 
 /* IDE Part */
-const vsCode = createObject(
+export const vsCode = createObject(
   'file',
-  ['C:', 'background', 'ide'],
+  ['C:', 'background', 'ide', 'vscode'],
   'VSCode',
   'vscode',
   IDE_Icons.VSCode,
   null,
   [],
 );
-const jetBrain = createObject(
+export const jetBrain = createObject(
   'folder',
   ['C:', 'background', 'ide', 'jetbrain'],
   'JetBrain',
   'jetbrain',
   IDE_Icons.ToolBox,
-  null,
+  pages.jetbrain,
   [],
 );
-const ide = createObject(
+export const ide = createObject(
   'folder',
   ['C:', 'background', 'ide'],
   'IDE',
@@ -33,7 +33,7 @@ const ide = createObject(
   [jetBrain, vsCode],
 );
 
-const background = createObject(
+export const background = createObject(
   'folder',
   ['C:', 'background'],
   'Background',
@@ -43,7 +43,7 @@ const background = createObject(
   [ide],
 );
 
-export const items = [jetBrain, ide, background];
+export const items = [jetBrain, ide, vsCode, background];
 
 export const translatePath = (path) => {
   let returnItem = {};

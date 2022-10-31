@@ -7,6 +7,7 @@ import { findPage } from '../../modules/browserControl';
 import Window from '../Window';
 import { popTask, popWeb } from '../../store/src/toggleItems';
 import ControlPage from '../pages/ControlPage';
+import { findParentNode } from '../../modules/activeControl';
 
 const ControlWindow = (props) => {
   /**
@@ -23,19 +24,22 @@ const ControlWindow = (props) => {
     setPage(findPage(folderObj));
   }, [folderObj, folderObj.path]);
 
-  const onClose = () => {
+  const onClose = (e) => {
+    const parentNoce = findParentNode(e.target, 'windowContainer');
+    const name = parentNoce.dataset.target;
+
     promise()
       .then(() => {
-        dispatch(closePage(pageName));
+        dispatch(closePage(name));
       })
       .then(() => {
-        dispatch(popWeb(pageName));
+        dispatch(popWeb(name));
       })
       .then(() => {
-        dispatch(popTask(pageName));
+        dispatch(popTask(name));
       })
       .then(() => {
-        dispatch(changePath(pageName, defaultPath));
+        dispatch(changePath(name, defaultPath));
       });
   };
 

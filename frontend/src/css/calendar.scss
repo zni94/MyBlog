@@ -1,7 +1,3 @@
-div.react-calendar.hide {
-  display: none;
-}
-
 div.react-calendar {
   width: 340px;
   max-height: 280px;
@@ -70,4 +66,8 @@ div.react-calendar {
     }
 
   }
+}
+
+div.react-calendar.active {
+  right: 10px;
 }

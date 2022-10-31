@@ -4,6 +4,8 @@ import { changePath } from '../store/src/togglePages';
 import { isNull } from './isNull';
 
 export const findPage = (obj) => {
+  console.log('FIND PAGE', obj);
+
   if (!isNull(obj))
     return items.find((state) => state.path.join('/') === obj.path.join('/'));
 };
