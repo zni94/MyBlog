@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { promise } from '../modules/promise';
 import { removeActive } from '../modules/activeControl';
+import {
+  calendarEle,
+  calendarHandler,
+  documentHandler,
+} from '../modules/controlCalendar';
 
 const TimeZone = () => {
-  const [calendar, setCalendar] = useState(false);
   const [date, setDate] = useState(new Date());
 
   const [hours, setHours] = useState(date.getHours());
@@ -22,26 +26,16 @@ const TimeZone = () => {
     return () => clearInterval(times);
   }, [date, hours, minutes, seconds]);
 
-  const clickEvent = () => {
-    const calendarEle = document.getElementsByClassName('react-calendar')[0];
-    calendarEle.classList.remove('active');
-  };
-
   const onClick = () => {
     removeActive('icon-container');
     removeActive('window-container');
 
-    const calendarEle = document.getElementsByClassName('react-calendar')[0];
     if (!calendarEle.classList.contains('active')) {
-      calendarEle.classList.add('active');
-
-      document.getElementById('layout').addEventListener('click', clickEvent);
+      calendarHandler.active();
+      documentHandler.add();
     } else {
-      calendarEle.classList.remove('active');
-
-      document
-        .getElementById('layout')
-        .removeEventListener('click', clickEvent);
+      calendarHandler.nonActive();
+      documentHandler.remove();
     }
   };
 

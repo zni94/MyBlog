@@ -3,19 +3,18 @@ import { useDispatch } from 'react-redux';
 import { promise } from '../../modules/promise';
 import { removeActive, toggleActiveByName } from '../../modules/activeControl';
 import { openPage } from '../../store/src/togglePages';
-import { pushTask, pushWeb } from '../../store/src/toggleItems';
-import ControlWindow from '../windows/ControlWindow';
+import { pushTask } from '../../store/src/toggleItems';
 
-const TaskFolder = (props) => {
+const ControlFolder = (props) => {
   /**
    * Input Object
    *   { pageName, isBool, path }
    *
    */
-  const { folderObj, path, pageName, title, thumbnail } = props;
+  const { folderObj, path, pageName, title, thumbnail, type } = props;
   const dispatch = useDispatch();
 
-  const onClick = () => {
+  const iconHandler = () => {
     if (folderObj.isBool) {
       removeActive('icon-container');
       toggleActiveByName('window-container', 'window-' + pageName);
@@ -25,21 +24,6 @@ const TaskFolder = (props) => {
     promise()
       .then(() => {
         dispatch(openPage(pageName));
-      })
-      .then(() => {
-        dispatch(
-          pushWeb({
-            pageName: pageName,
-            window: (
-              <ControlWindow
-                folderObj={folderObj}
-                pageName={pageName}
-                defaultPath={path}
-                target={pageName}
-              />
-            ),
-          }),
-        );
       })
       .then(() => {
         removeActive('icon-container');
@@ -55,7 +39,16 @@ const TaskFolder = (props) => {
       });
   };
 
-  return <Icon onClick={onClick} title={title} thumbnail={thumbnail} />;
+  switch (type) {
+    case 'folder':
+      return (
+        <Icon onDoubleClick={iconHandler} title={title} thumbnail={thumbnail} />
+      );
+    case 'task':
+      return <Icon onClick={iconHandler} title={title} thumbnail={thumbnail} />;
+    default:
+      return;
+  }
 };
 
-export default TaskFolder;
+export default ControlFolder;

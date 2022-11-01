@@ -1,11 +1,34 @@
 import Icon from '../Icon';
+import axios from 'axios';
 
 const ControlFile = (props) => {
-  const { title, onDoubleClick, thumbnail } = props;
+  const { title, pageName, thumbnail, type } = props;
 
-  return (
-    <Icon title={title} onDoubleClick={onDoubleClick} thumbnail={thumbnail} />
-  );
+  const fileHandler = () => {
+    axios
+      .get('/file', {
+        params: {
+          pageName: pageName,
+        },
+      })
+      .then((resp) => {
+        console.log('resp', resp.data);
+      })
+      .catch((err) => {
+        console.error('error', err);
+      });
+  };
+
+  switch (type) {
+    case 'file':
+      return (
+        <Icon title={title} onDoubleClick={fileHandler} thumbnail={thumbnail} />
+      );
+    case 'task':
+      return <Icon title={title} onClick={fileHandler} thumbnail={thumbnail} />;
+    default:
+      return;
+  }
 };
 
 export default ControlFile;

@@ -79,8 +79,6 @@ const returnPath = (pageName, path) => {
 
   state[pageName].path = path;
 
-  console.log('state', state);
-
   return state;
 };
 
