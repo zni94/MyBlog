@@ -1,17 +1,35 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../css/nav.css';
 import TimeZone from './TimeZone';
 import { promise } from '../modules/promise';
 import { removeActive, toggleActiveByName } from '../modules/activeControl';
 import Calendar from './Calendar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { items } from '../store/src/fileNavigator';
+import {
+  hideTask,
+  resetInput,
+  showTask,
+  taskClickEvent,
+} from '../modules/controlNavigator';
+import { hideCalendar } from '../modules/controlCalendar';
+import { toggleOnOff } from '../store/src/toggleLogon';
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+
   const { taskBar, search } = useSelector((state) => state.navItems);
   const { tasks } = useSelector((state) => state.toggleItems);
 
   const [taskList, setTaskList] = useState(items);
+  const [ads, setAds] = useState([]);
+
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchList, setSearchList] = useState([]);
+  useEffect(() => {
+    const taskEle = document.getElementById('task');
+    if (taskEle.classList.contains('active')) showTask();
+  }, [isSearch]);
 
   const hideHandler = (e) => {
     const pageName = 'window-' + e.currentTarget.dataset.value;
@@ -27,71 +45,53 @@ const NavBar = () => {
       });
   };
 
-  const clickEvent = () => {
-    const taskEle = document.getElementById('task');
-    taskEle.classList.remove('active');
-
-    const inputEle = document.getElementById('searchArea');
-    inputEle.value = '';
-
-    const newTaskList = items.filter((state) =>
-      state.pageName.includes(inputEle.value.toLowerCase()),
-    );
-
-    setTaskList(newTaskList);
-  };
-
   const taskHandler = (e) => {
     removeActive('icon-container');
     removeActive('window-container');
 
-    const taskEle = document.getElementById('task');
-    if (!taskEle.classList.contains('active')) {
-      taskEle.classList.add('active');
+    taskClickEvent();
+    resetInput(setTaskList);
 
-      document.getElementById('layout').addEventListener('click', clickEvent);
+    const name = e.currentTarget.dataset.value;
+    if (name === 'search') {
+      searchActive();
     } else {
-      taskEle.classList.remove('active');
-
-      document
-        .getElementById('layout')
-        .removeEventListener('click', clickEvent);
-
-      const inputEle = document.getElementById('searchArea');
-      inputEle.value = '';
-
-      const newTaskList = items.filter((state) =>
-        state.pageName.includes(inputEle.value.toLowerCase()),
-      );
-
-      setTaskList(newTaskList);
+      const taskEle = document.getElementById('task');
+      taskEle.classList.remove('search');
+      setIsSearch(false);
     }
+  };
+
+  const searchActive = () => {
+    const taskEle = document.getElementById('task');
+    taskEle.classList.add('search');
+    setIsSearch(true);
   };
 
   const searchHandler = (e) => {
     const searchVal = e.currentTarget.value;
-    const newTaskList = items.filter((state) =>
-      state.pageName.includes(searchVal.toLowerCase()),
-    );
-
-    setTaskList(newTaskList);
+    if (searchVal !== '') {
+      const newSearchList = items.filter((state) =>
+        state.pageName.includes(searchVal.toLowerCase()),
+      );
+      setSearchList(newSearchList);
+    } else {
+      setSearchList([]);
+    }
   };
 
   const onClick = () => {
-    const taskEle = document.getElementById('task');
-    taskEle.classList.remove('active');
+    hideTask();
+    hideCalendar();
+    resetInput(setTaskList);
+  };
 
-    const calendarEle = document.getElementsByClassName('react-calendar')[0];
-    calendarEle.classList.remove('active');
+  const logoffHandler = () => {
+    dispatch(toggleOnOff(false));
+  };
 
-    const inputEle = document.getElementById('searchArea');
-    inputEle.value = '';
-
-    const newTaskList = items.filter((state) =>
-      state.pageName.includes(inputEle.value.toLowerCase()),
-    );
-
-    setTaskList(newTaskList);
+  const powerOffHandler = () => {
+    window.close();
   };
 
   return (
@@ -104,28 +104,87 @@ const NavBar = () => {
               id={'searchArea'}
               type={'text'}
               spellCheck={false}
-              placeholder={'검색하려면 여기에 입력하세요.'}
+              placeholder={`${
+                isSearch
+                  ? '여기에 입력하여 검색'
+                  : '검색하려면 여기에 입력하세요.'
+              }`}
+              onClick={searchActive}
               onChange={searchHandler}
             />
           </div>
         </div>
         <div className={'nav-task-section'}>
-          <div className={'pin'}>고정됨</div>
-          <ul>
-            {taskList.length > 0 &&
-              taskList.map((item, index) => (
-                <li key={index} onClick={onClick}>
-                  {item.task}
-                </li>
-              ))}
-          </ul>
+          {isSearch ? (
+            <>
+              <div className={'nav-task-section-item-box'}>
+                <div className={'pin'}>검색 결과</div>
+                <ul>
+                  {searchList.length > 0 ? (
+                    searchList.map((item, index) => (
+                      <li key={index} onClick={onClick}>
+                        {item.task}
+                      </li>
+                    ))
+                  ) : (
+                    <li id={'noData'}>검색 결과가 표시됩니다.</li>
+                  )}
+                </ul>
+              </div>
+              <div className={'nav-task-section-ads-box'}>
+                <div className={'pin'}>광고</div>
+                <ul>
+                  {ads.length > 0 ? (
+                    ads.map((item, index) => (
+                      <li key={index} onClick={onClick}>
+                        {item.task}
+                      </li>
+                    ))
+                  ) : (
+                    <li id={'noData'}>현재 진행 중인 광고가 없습니다.</li>
+                  )}
+                </ul>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={'nav-task-section-item-box'}>
+                <div className={'pin'}>고정됨</div>
+                <ul style={{ justifyContent: 'space-evenly' }}>
+                  {taskList.length > 0 ? (
+                    taskList.map((item, index) => (
+                      <li key={index} onClick={onClick}>
+                        {item.task}
+                      </li>
+                    ))
+                  ) : (
+                    <li id={'noData'}>검색 결과가 표시됩니다.</li>
+                  )}
+                </ul>
+              </div>
+              <div className={'nav-task-section-ads-box'}>
+                <div className={'pin'}>광고</div>
+                <ul>
+                  {ads.length > 0 ? (
+                    ads.map((item, index) => (
+                      <li key={index} onClick={onClick}>
+                        {item.task}
+                      </li>
+                    ))
+                  ) : (
+                    <li id={'noData'}>현재 진행 중인 광고가 없습니다.</li>
+                  )}
+                </ul>
+              </div>
+            </>
+          )}
         </div>
         <div className={'nav-task-footer'}>
-          <button>
+          <button onClick={logoffHandler}>
             <span className={'material-symbols-outlined'}>person</span>
             <span id={'userName'}>Guest</span>
           </button>
-          <button>
+          <button onClick={powerOffHandler}>
             <span className={'material-symbols-outlined'}>
               power_settings_new
             </span>

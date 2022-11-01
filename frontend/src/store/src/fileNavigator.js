@@ -71,7 +71,34 @@ const background = createObject(
   [ide],
 );
 
-export const items = [jetBrain, ide, vsCode, background];
+export const items = [
+  jetBrain,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  ide,
+  vsCode,
+  background,
+].sort((a, b) => {
+  if (a.pageName > b.pageName) return 1;
+  if (a.pageName < b.pageName) return -1;
+  if (a.pageName === b.pageName) return 0;
+});
 
 export const translatePath = (path) => {
   let returnItem = {};

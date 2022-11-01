@@ -1,4 +1,4 @@
-const TOGGLE_ON_OFF = 'TOGGLE/BLOG';
+const TOGGLE_ON_OFF = 'TOGGLE/LOGON';
 
 export const toggleOnOff = (state) => ({
   type: TOGGLE_ON_OFF,
