@@ -1,13 +1,13 @@
-import { changePath, closePage } from '../../store/src/togglePages';
 import { useDispatch } from 'react-redux';
 import { promise } from '../../modules/promise';
 import { useEffect, useState } from 'react';
 import { isNull } from '../../modules/isNull';
 import { findPage } from '../../modules/browserControl';
 import Window from '../Window';
-import { popTask, popWeb } from '../../store/src/toggleItems';
+import { popTask } from '../../store/src/toggleItems';
 import ControlPage from '../pages/ControlPage';
 import { findParentNode } from '../../modules/activeControl';
+import { changePath, closePage } from '../../store/src/togglePages';
 
 const ControlWindow = (props) => {
   /**
@@ -15,7 +15,7 @@ const ControlWindow = (props) => {
    *   { pageName, isBool, path }
    *
    */
-  const { folderObj, pageName, defaultPath, target } = props;
+  const { folderObj, defaultPath, target } = props;
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(findPage(folderObj));
@@ -30,13 +30,10 @@ const ControlWindow = (props) => {
 
     promise()
       .then(() => {
-        dispatch(closePage(name));
-      })
-      .then(() => {
-        dispatch(popWeb(name));
-      })
-      .then(() => {
         dispatch(popTask(name));
+      })
+      .then(() => {
+        dispatch(closePage(name));
       })
       .then(() => {
         dispatch(changePath(name, defaultPath));

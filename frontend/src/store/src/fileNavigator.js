@@ -5,7 +5,35 @@ import { pages } from './togglePages';
 /* SNS Part */
 
 /* IDE Part */
-export const vsCode = createObject(
+const dataGrip = createObject(
+  'file',
+  ['C:', 'background', 'ide', 'jetbrain', 'datagrip'],
+  'DataGrip',
+  'datagrip',
+  IDE_Icons.DataGrip,
+  null,
+  [],
+);
+const webStorm = createObject(
+  'file',
+  ['C:', 'background', 'ide', 'jetbrain', 'webstorm'],
+  'WebStorm',
+  'webstorm',
+  IDE_Icons.WebStorm,
+  null,
+  [],
+);
+
+const intelliJ = createObject(
+  'file',
+  ['C:', 'background', 'ide', 'jetbrain', 'intellij'],
+  'IntelliJ',
+  'intellij',
+  IDE_Icons.IntelliJ,
+  null,
+  [],
+);
+const vsCode = createObject(
   'file',
   ['C:', 'background', 'ide', 'vscode'],
   'VSCode',
@@ -14,16 +42,16 @@ export const vsCode = createObject(
   null,
   [],
 );
-export const jetBrain = createObject(
+const jetBrain = createObject(
   'folder',
   ['C:', 'background', 'ide', 'jetbrain'],
   'JetBrain',
   'jetbrain',
   IDE_Icons.ToolBox,
   pages.jetbrain,
-  [],
+  [intelliJ, webStorm, dataGrip],
 );
-export const ide = createObject(
+const ide = createObject(
   'folder',
   ['C:', 'background', 'ide'],
   'IDE',
@@ -33,7 +61,7 @@ export const ide = createObject(
   [jetBrain, vsCode],
 );
 
-export const background = createObject(
+const background = createObject(
   'folder',
   ['C:', 'background'],
   'Background',

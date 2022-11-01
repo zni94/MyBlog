@@ -1,5 +1,6 @@
 import '../css/icon.css';
 import { addActiveById, removeActive } from '../modules/activeControl';
+import { calendarHandler, documentHandler } from '../modules/controlCalendar';
 
 const Icon = (props) => {
   const { onDoubleClick, onClick, thumbnail, title, target, path } = props;
@@ -7,6 +8,10 @@ const Icon = (props) => {
   const onMouseDown = (e) => {
     removeActive('icon-container');
     addActiveById(e.target, 'iconContainer');
+
+    // calendar remove active
+    calendarHandler.nonActive();
+    documentHandler.remove();
   };
 
   return (

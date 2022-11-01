@@ -1,15 +1,3 @@
-const PUSH_WEB = 'PUSH/WEB';
-const POP_WEB = 'POP/WEB';
-
-export const pushWeb = (obj) => ({
-  type: PUSH_WEB,
-  obj,
-});
-export const popWeb = (pageName) => ({
-  type: POP_WEB,
-  pageName,
-});
-
 const PUSH_TASK = 'PUSH/TASK';
 const POP_TASK = 'POP/TASK';
 
@@ -23,36 +11,22 @@ export const popTask = (pageName) => ({
 });
 
 const initialState = {
-  windows: [],
   viewer: [],
   tasks: [],
 };
 
 const toggleItems = (state = initialState, action) => {
   switch (action.type) {
-    case PUSH_WEB:
-      return {
-        ...state,
-        windows: [...state.windows, action.obj],
-      };
-    case POP_WEB:
-      return {
-        ...state,
-        windows: [...state.windows].filter(
-          (state) => state.pageName !== action.pageName,
-        ),
-      };
     case PUSH_TASK:
       return {
         ...state,
         tasks: [...state.tasks, action.obj],
       };
     case POP_TASK:
+      const returnTasks = returnItems([...state.tasks], action.pageName);
       return {
         ...state,
-        tasks: [...state.tasks].filter(
-          (state) => state.pageName !== action.pageName,
-        ),
+        tasks: returnTasks,
       };
     default:
       return state;
@@ -60,3 +34,13 @@ const toggleItems = (state = initialState, action) => {
 };
 
 export default toggleItems;
+
+const returnItems = (arr, pageName) => {
+  const prevArr = [...arr];
+  const index = prevArr.findIndex((state) => state.pageName === pageName);
+
+  prevArr.splice(index, 1);
+  const nextArr = prevArr;
+
+  return nextArr;
+};

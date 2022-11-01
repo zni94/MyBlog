@@ -1,10 +1,6 @@
-import ControlPage from '../components/pages/ControlPage';
 import { isNull } from './isNull';
 import ControlFile from '../components/files/ControlFile';
-import BackgroundFolder from '../components/folders/BackgroundFolder';
-import TaskFolder from '../components/folders/TaskFolder';
-import TaskFile from '../components/files/TaskFile';
-import axios from 'axios';
+import ControlFolder from '../components/folders/ControlFolder';
 
 export const createObject = (
   type,
@@ -26,61 +22,52 @@ export const createObject = (
 
   switch (type) {
     case 'folder':
-      const backgroundFolder = !isNull(folderObj) ? (
-        <BackgroundFolder
+      const commonFolder = !isNull(folderObj) ? (
+        <ControlFolder
           folderObj={folderObj}
           pageName={pageName}
           title={title}
           path={path}
           thumbnail={thumbnail}
+          type={'folder'}
         />
       ) : (
         <div />
       );
-      fileObj.background = backgroundFolder;
+      fileObj.folder = commonFolder;
 
       const taskFolder = !isNull(folderObj) ? (
-        <TaskFolder
+        <ControlFolder
           folderObj={folderObj}
           pageName={pageName}
           title={title}
           path={path}
           thumbnail={thumbnail}
+          type={'task'}
         />
       ) : (
         <div />
       );
       fileObj.task = taskFolder;
 
-      const page = !isNull(folderObj) ? (
-        <ControlPage folderObj={folderObj} />
-      ) : (
-        <div />
-      );
-      fileObj.page = page;
-
       break;
     case 'file':
-      const file = (
+      const commonFile = (
         <ControlFile
           title={title}
-          onDoubleClick={() => {
-            console.log('Hello World');
-          }}
+          pageName={pageName}
           thumbnail={thumbnail}
+          type={'file'}
         />
       );
-      fileObj.file = file;
+      fileObj.file = commonFile;
 
       const taskFile = (
-        <TaskFile
+        <ControlFile
           title={title}
-          onClick={() => {
-            axios.get('/file').then((resp) => {
-              console.log('resp', resp);
-            });
-          }}
+          pageName={pageName}
           thumbnail={thumbnail}
+          type={'task'}
         />
       );
       fileObj.task = taskFile;
