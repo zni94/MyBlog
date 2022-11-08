@@ -49,9 +49,7 @@ export const createObject = (
           thumbnail={thumbnail}
           type={'task'}
         />
-      ) : (
-        <div />
-      );
+      ) : null;
       fileObj.task = taskFolder;
 
       break;

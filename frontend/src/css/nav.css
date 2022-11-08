@@ -165,9 +165,13 @@ div.nav-task-container.search div.nav-task-section div.nav-task-section-item-box
   flex-direction: column;
   flex-wrap: nowrap;
 }
+div.nav-task-container.search div.nav-task-section div.nav-task-section-ads-box ul li,
+div.nav-task-container.search div.nav-task-section div.nav-task-section-item-box ul li {
+  margin: 10px 0;
+}
 div.nav-task-container.search div.nav-task-section div.nav-task-section-ads-box ul li div.icon-container,
 div.nav-task-container.search div.nav-task-section div.nav-task-section-item-box ul li div.icon-container {
-  padding: 0.875rem 0;
+  padding: 5px 0;
   margin: 0;
   width: 100%;
   flex-direction: row;
@@ -176,7 +180,6 @@ div.nav-task-container.search div.nav-task-section div.nav-task-section-item-box
 div.nav-task-container.search div.nav-task-section div.nav-task-section-ads-box ul li div.icon-container button,
 div.nav-task-container.search div.nav-task-section div.nav-task-section-item-box ul li div.icon-container button {
   padding-left: 1.125rem;
-  border-left: 3px solid rgba(255, 255, 255, 0.8);
 }
 div.nav-task-container.search div.nav-task-section div.nav-task-section-ads-box ul li div.icon-container button svg,
 div.nav-task-container.search div.nav-task-section div.nav-task-section-item-box ul li div.icon-container button svg {

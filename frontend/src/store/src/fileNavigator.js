@@ -66,35 +66,12 @@ const background = createObject(
   ['C:', 'background'],
   'Background',
   'background',
-  Menu_Icons.Folder,
+  Menu_Icons.Home,
   null,
   [ide],
 );
 
-export const items = [
-  jetBrain,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  ide,
-  vsCode,
-  background,
-].sort((a, b) => {
+export const items = [jetBrain, ide, vsCode, background].sort((a, b) => {
   if (a.pageName > b.pageName) return 1;
   if (a.pageName < b.pageName) return -1;
   if (a.pageName === b.pageName) return 0;

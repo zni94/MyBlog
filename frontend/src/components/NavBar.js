@@ -4,7 +4,7 @@ import TimeZone from './TimeZone';
 import { promise } from '../modules/promise';
 import { removeActive, toggleActiveByName } from '../modules/activeControl';
 import Calendar from './Calendar';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { items } from '../store/src/fileNavigator';
 import {
   hideTask,
@@ -14,6 +14,7 @@ import {
 } from '../modules/controlNavigator';
 import { hideCalendar } from '../modules/controlCalendar';
 import { toggleOnOff } from '../store/src/toggleLogon';
+import { isNull } from '../modules/isNull';
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -71,9 +72,12 @@ const NavBar = () => {
   const searchHandler = (e) => {
     const searchVal = e.currentTarget.value;
     if (searchVal !== '') {
-      const newSearchList = items.filter((state) =>
-        state.pageName.includes(searchVal.toLowerCase()),
+      const newSearchList = items.filter(
+        (state) =>
+          state.pageName.includes(searchVal.toLowerCase()) &&
+          !isNull(state.task),
       );
+
       setSearchList(newSearchList);
     } else {
       setSearchList([]);
@@ -95,7 +99,7 @@ const NavBar = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <div className={'nav-task-container'} id={'task'}>
         <div className={'nav-task-header'}>
           <div className={'nav-task-search-zone'}>
@@ -121,11 +125,14 @@ const NavBar = () => {
                 <div className={'pin'}>검색 결과</div>
                 <ul>
                   {searchList.length > 0 ? (
-                    searchList.map((item, index) => (
-                      <li key={index} onClick={onClick}>
-                        {item.task}
-                      </li>
-                    ))
+                    searchList.map((item, index) => {
+                      if (!isNull(item.task))
+                        return (
+                          <li key={index} onClick={onClick}>
+                            {item.task}
+                          </li>
+                        );
+                    })
                   ) : (
                     <li id={'noData'}>검색 결과가 표시됩니다.</li>
                   )}
@@ -150,13 +157,16 @@ const NavBar = () => {
             <>
               <div className={'nav-task-section-item-box'}>
                 <div className={'pin'}>고정됨</div>
-                <ul style={{ justifyContent: 'space-evenly' }}>
+                <ul style={{ justifyContent: 'flex-start' }}>
                   {taskList.length > 0 ? (
-                    taskList.map((item, index) => (
-                      <li key={index} onClick={onClick}>
-                        {item.task}
-                      </li>
-                    ))
+                    taskList.map((item, index) => {
+                      if (!isNull(item.task))
+                        return (
+                          <li key={index} onClick={onClick}>
+                            {item.task}
+                          </li>
+                        );
+                    })
                   ) : (
                     <li id={'noData'}>검색 결과가 표시됩니다.</li>
                   )}
@@ -228,7 +238,7 @@ const NavBar = () => {
         </ul>
         <TimeZone />
       </div>
-    </>
+    </Fragment>
   );
 };
 

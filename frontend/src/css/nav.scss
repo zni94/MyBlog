@@ -190,8 +190,10 @@ div.nav-task-container.search {
         flex-wrap: nowrap;
 
         li {
+          margin: 10px 0;
+
           div.icon-container {
-            padding: 0.875rem 0;
+            padding: 5px 0;
             margin: 0;
             width: 100%;
             flex-direction: row;
@@ -199,7 +201,6 @@ div.nav-task-container.search {
 
             button {
               padding-left: 1.125rem;
-              border-left: 3px solid rgba(255, 255, 255, .8);
 
               svg {
                 width: 24px;
