@@ -17,7 +17,11 @@ export const createObject = (
     title: title,
     pageName: pageName,
     thumbnail: thumbnail,
-    items: items,
+    items: items.sort((a, b) => {
+      if (a.pageName > b.pageName) return 1;
+      if (a.pageName < b.pageName) return -1;
+      if (a.pageName === b.pageName) return 0;
+    }),
   };
 
   switch (type) {
@@ -45,9 +49,7 @@ export const createObject = (
           thumbnail={thumbnail}
           type={'task'}
         />
-      ) : (
-        <div />
-      );
+      ) : null;
       fileObj.task = taskFolder;
 
       break;

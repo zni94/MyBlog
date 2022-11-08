@@ -1,17 +1,22 @@
 import '../css/icon.css';
 import { addActiveById, removeActive } from '../modules/activeControl';
-import { calendarHandler, documentHandler } from '../modules/controlCalendar';
+import {
+  calendarHandler,
+  documentHandler,
+  hideCalendar,
+} from '../modules/controlCalendar';
+import { hideTask } from '../modules/controlNavigator';
 
 const Icon = (props) => {
   const { onDoubleClick, onClick, thumbnail, title, target, path } = props;
 
-  const onMouseDown = (e) => {
+  const onMouseUp = (e) => {
     removeActive('icon-container');
     addActiveById(e.target, 'iconContainer');
 
-    // calendar remove active
-    calendarHandler.nonActive();
-    documentHandler.remove();
+    // calendar, task remove active
+    hideCalendar();
+    hideTask();
   };
 
   return (
@@ -20,7 +25,7 @@ const Icon = (props) => {
       id={'iconContainer'}
       onDoubleClick={onDoubleClick}
       onClick={onClick}
-      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
       data-target={target}
       data-path={path}
     >

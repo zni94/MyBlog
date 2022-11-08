@@ -11,7 +11,7 @@ const ControlFolder = (props) => {
    *   { pageName, isBool, path }
    *
    */
-  const { folderObj, path, pageName, title, thumbnail, type } = props;
+  const { folderObj, pageName, title, thumbnail, type } = props;
   const dispatch = useDispatch();
 
   const iconHandler = () => {
